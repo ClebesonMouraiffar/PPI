@@ -20,7 +20,7 @@ public class UsuarioDao implements DAO<UsuarioModel> {
         Connection c = conexao.abrirConexao();
         try {
             PreparedStatement statement = c.prepareStatement(
-                    "insert into usuarios(nome, data_nascimento) "
+                    "insert into usuario(nome, data_nascimento) "
                             + "values (?,?)");
             statement.setString(1, model.getNome());
            
@@ -85,7 +85,7 @@ public class UsuarioDao implements DAO<UsuarioModel> {
         Connection c = conexao.abrirConexao();
         try {
             PreparedStatement statement = c.prepareStatement(
-                    "select * from usuarios");
+                    "select * from usuario");
             ResultSet resultado = statement.executeQuery();
             
             while(resultado.next()){

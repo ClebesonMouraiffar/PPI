@@ -24,13 +24,11 @@ import javax.servlet.http.HttpSession;
  * @author LAB
  */
 public class Autenticacao implements Filter {
-    
- 
-    
+
     public Autenticacao() {
-    }    
-    
-   public void doFilter(ServletRequest request, ServletResponse response,
+    }
+
+    public void doFilter(ServletRequest request, ServletResponse response,
             FilterChain chain)
             throws IOException, ServletException {
 
@@ -38,15 +36,14 @@ public class Autenticacao implements Filter {
         HttpSession sessao = requisicao.getSession();
 
         if ((sessao.getAttribute("logado") != null)
-                || requisicao.getRequestURI().endsWith("login.jsp") 
-             || requisicao.getRequestURI().endsWith("LoginController")){
+                || requisicao.getRequestURI().endsWith("login.jsp")
+                || requisicao.getRequestURI().endsWith("LoginController")) {
             chain.doFilter(request, response);
-        }
-        else{
+        } else {
             HttpServletResponse resposta = (HttpServletResponse) response;
             resposta.sendRedirect("login.jsp");
         }
-        
+
     }
 
     /**
@@ -58,5 +55,5 @@ public class Autenticacao implements Filter {
     public void init(FilterConfig filterConfig) {
 
     }
-    
+
 }
