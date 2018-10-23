@@ -4,7 +4,6 @@
     Author     : LAB
 --%>
 
-<%@page import="model.UsuarioModel"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -13,11 +12,13 @@
         <title>JSP Page</title>
     </head>
     <body>
-        <%
-            UsuarioModel modelo = (UsuarioModel) request.getSession().getAttribute("logado");
-            out.println("Bem Vindo");
-        %>
-        <a href="./cadastrarUsuario.jsp">Cadastrar Usuário</a>
-        <a href="./UsuarioController">Listar Usuários</a>
+        <form action="UsuarioController" method="POST">
+            Nome: <input name="nome">
+            <br>
+            Data de Nascimento: <input  name="data_nascimento">
+            <br>
+            <input type="submit" value="Enviar">
+            
+        </form>
     </body>
 </html>
