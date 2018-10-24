@@ -28,7 +28,7 @@ public class UsuarioController extends HttpServlet {
             throws ServletException, IOException {
 
         UsuarioDao usuarioDao = new UsuarioDao();
-        String pagina = "./listarUsuariio.jsp";
+        String pagina = "./listarUsuario.jsp";
         String id = request.getParameter("id");
         String acao = request.getParameter("acao");
 
