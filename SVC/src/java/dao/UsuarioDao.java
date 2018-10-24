@@ -20,15 +20,16 @@ public class UsuarioDao implements DAO<UsuarioModel> {
         Connection c = conexao.abrirConexao();
         try {
             PreparedStatement statement = c.prepareStatement(
-                    "insert into usuario(nome, data_nascimento) "
-                            + "values (?,?)");
+                    "insert into usuario(nome,senha, data_nascimento) "
+                            + "values (?,?,?)");
             statement.setString(1, model.getNome());
+            statement.setString(2, model.getSenha());
            
             //Date util -> Date sql            
             java.sql.Date data_nascimento = 
                     new java.sql.Date(model.getDataNascimento().getTime());
            
-            statement.setDate(2, data_nascimento);
+            statement.setDate(3, data_nascimento);
             
             statement.execute();
             return true;

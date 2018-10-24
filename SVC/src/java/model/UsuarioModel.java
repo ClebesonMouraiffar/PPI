@@ -14,14 +14,14 @@ import dao.UsuarioDao;
  * @author Ederson
  */
 public class UsuarioModel {
-    
+
     private int id;
     private String nome;
+    private String senha;
     private Date dataNascimento;
 
   //getters e setters
-    
-      public int getId() {
+    public int getId() {
         return id;
     }
 
@@ -36,8 +36,15 @@ public class UsuarioModel {
     public void setNome(String nome) {
         this.nome = nome;
     }
-   
-   
+
+    public String getSenha() {
+        return senha;
+    }
+
+    public void setSenha(String senha) {
+        this.senha = senha;
+    }
+
     public Date getDataNascimento() {
         return dataNascimento;
     }
@@ -45,14 +52,12 @@ public class UsuarioModel {
     public void setDataNascimento(Date dataNascimento) {
         this.dataNascimento = dataNascimento;
     }
-    
-     public void listar(){
+
+    public void listar() {
         List<UsuarioModel> lista = new UsuarioDao().buscar();
-        for(UsuarioModel usuario: lista){
+        for (UsuarioModel usuario : lista) {
             System.out.println(usuario.toString());
         }
     }
-    
-    
-    
+
 }

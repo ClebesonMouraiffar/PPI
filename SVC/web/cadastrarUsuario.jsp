@@ -15,6 +15,8 @@
         <form action="UsuarioController" method="POST">
             Nome: <input name="nome">
             <br>
+            Senha: <input name="senha">
+            <br>
             Data de Nascimento: <input  name="data_nascimento">
             <br>
             <input type="submit" value="Enviar">

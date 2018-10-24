@@ -29,7 +29,7 @@
                 <td>Ações</td>
             </tr>
             <%
-                for(UsuarioModel u:lista){
+                for(UsuarioModel u : lista){
              %>
              <tr>
                  <td><%=u.getId()%></td>

@@ -41,7 +41,7 @@ public class UsuarioController extends HttpServlet {
                 request.setAttribute("usuario", usuarioDao.buscar(Integer.parseInt(id)));
             }
         } else {
-            request.setAttribute("Lista", new UsuarioDao().buscar());
+            request.setAttribute("lista", new UsuarioDao().buscar());
         }
         RequestDispatcher view = request.getRequestDispatcher(pagina);
         view.forward(request, response);
@@ -56,6 +56,7 @@ public class UsuarioController extends HttpServlet {
         UsuarioModel model = new UsuarioModel();
 
         model.setNome(request.getParameter("nome"));
+        model.setSenha(request.getParameter("senha"));
 
         //string -> date  
         try {
