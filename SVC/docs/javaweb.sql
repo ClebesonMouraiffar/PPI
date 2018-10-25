@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: 23-Out-2018 às 03:17
+-- Generation Time: 25-Out-2018 às 02:15
 -- Versão do servidor: 10.1.32-MariaDB
 -- PHP Version: 7.2.5
 
@@ -21,27 +21,37 @@ SET time_zone = "+00:00";
 --
 -- Database: `javaweb`
 --
+CREATE DATABASE IF NOT EXISTS `javaweb` DEFAULT CHARACTER SET latin1 COLLATE latin1_swedish_ci;
+USE `javaweb`;
 
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `usuarios`
+-- Estrutura da tabela `usuario`
 --
 
-CREATE TABLE `usuarios` (
+CREATE TABLE `usuario` (
   `id` int(11) NOT NULL,
   `nome` varchar(100) NOT NULL,
-  `data_nascimento` varchar(100) NOT NULL
+  `senha` varchar(100) NOT NULL,
+  `data_nascimento` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Extraindo dados da tabela `usuario`
+--
+
+INSERT INTO `usuario` (`id`, `nome`, `senha`, `data_nascimento`) VALUES
+(1, 'admin', 'admin', '2018-10-01');
 
 --
 -- Indexes for dumped tables
 --
 
 --
--- Indexes for table `usuarios`
+-- Indexes for table `usuario`
 --
-ALTER TABLE `usuarios`
+ALTER TABLE `usuario`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -49,10 +59,10 @@ ALTER TABLE `usuarios`
 --
 
 --
--- AUTO_INCREMENT for table `usuarios`
+-- AUTO_INCREMENT for table `usuario`
 --
-ALTER TABLE `usuarios`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+ALTER TABLE `usuario`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
