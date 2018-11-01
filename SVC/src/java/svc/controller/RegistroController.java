@@ -13,7 +13,6 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 import svc.dao.VeiculoDao;
 import svc.model.UsuarioModel;
 
@@ -27,9 +26,9 @@ public class RegistroController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        VeiculoDao veiculoDao = new VeiculoDao();
+        VeiculoDao veiculoD = new VeiculoDao();
         String pagina = "./registro.jsp";
-        request.setAttribute("lista", new VeiculoDao().buscar());
+        request.setAttribute("lista", veiculoD.buscar());
         RequestDispatcher view = request.getRequestDispatcher(pagina);
         view.forward(request, response);
     }
@@ -41,11 +40,10 @@ public class RegistroController extends HttpServlet {
         String nome = request.getParameter("login");
         String senha = request.getParameter("senha");
          
-        UsuarioModel model
+        UsuarioModel usuarioM
                 = new UsuarioDao().login(nome, senha);
 
-        if (model.getId() != 0) {
-            request.getSession().setAttribute("logado", model);
+        if (usuarioM.getId() != 0) {
             response.sendRedirect("index.jsp");
         } else {
             response.sendRedirect("registro.jsp");

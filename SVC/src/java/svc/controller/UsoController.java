@@ -21,7 +21,7 @@ import svc.model.VeiculoModel;
  * @author LAB
  */
 @WebServlet(name = "veiculo", urlPatterns = {"/veiculo","/veiculos"})
-public class VeiculoController extends HttpServlet {
+public class UsoController extends HttpServlet {
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     @Override
