@@ -3,30 +3,32 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package controller;
+package svc.controller;
 
-import dao.UsuarioDao;
+import svc.dao.UsuarioDao;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import model.UsuarioModel;
+import svc.model.UsuarioModel;
 
 /**
  *
  * @author LAB
  */
+@WebServlet(name = "usuario", urlPatterns = {"/usuario","/usuarios"})
 public class UsuarioController extends HttpServlet {
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-
+        request.setCharacterEncoding("UTF-8");
         UsuarioDao usuarioDao = new UsuarioDao();
         String pagina = "./listarUsuario.jsp";
         String id = request.getParameter("id");
@@ -45,7 +47,6 @@ public class UsuarioController extends HttpServlet {
         }
         RequestDispatcher view = request.getRequestDispatcher(pagina);
         view.forward(request, response);
-        
 
     }
 
@@ -53,10 +54,11 @@ public class UsuarioController extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
-        UsuarioModel model = new UsuarioModel();
-
-        model.setNome(request.getParameter("nome"));
-        model.setSenha(request.getParameter("senha"));
+        UsuarioModel usuarioM = new UsuarioModel();
+        request.setCharacterEncoding("UTF-8");
+        usuarioM.setNome(request.getParameter("nome"));
+        usuarioM.setSenha(request.getParameter("senha"));
+        String id = request.getParameter("id");
 
         //string -> date  
         try {
@@ -66,33 +68,34 @@ public class UsuarioController extends HttpServlet {
             Date date = simpleDateFormat.
                     parse(request.getParameter("data_nascimento"));
 
-            model.setDataNascimento(date);
+            usuarioM.setDataNascimento(date);
         } catch (Exception e) {
-            model.setDataNascimento(null);
+            usuarioM.setDataNascimento(null);
         }
 
-        UsuarioDao dao = new UsuarioDao();
-        String mensagem;
-        if (dao.inserir(model)) {
-            mensagem = "Usuario cadastrado";
-        } else {
-            mensagem = "Erro ao cadastrar usuário";
-        }
-        
-        model.setNome(request.getParameter("nome"));
-        String id = request.getParameter("id");
-        
-        if (id != null){
-            if (!id.equals("")){
-                model.setId(Integer.parseInt(id));
-                dao.editar(model);
+        UsuarioDao usuarioD = new UsuarioDao();
+        String mensagem = "null";
+
+        if (id != null) {
+            if (!id.equals("")) {
+                usuarioM.setId(Integer.parseInt(id));                
+                if (usuarioD.editar(usuarioM)) {
+                    mensagem = "Usuario editado";
+                } else {
+                    mensagem = "Erro ao editar usuário";
+                }
             }
-        } else{
-            dao.inserir(model);
+        } else {
+            //usuarioD.inserir(usuarioM);
+            if (usuarioD.inserir(usuarioM)) {
+                mensagem = "Usuario cadastrado";
+            } else {
+                mensagem = "Erro ao cadastrar usuário";
+            }
         }
 
-        RequestDispatcher dispatcher = request.getRequestDispatcher("listarUsuario.jsp");
-        request.setAttribute("lista", dao.buscar());
+        RequestDispatcher dispatcher = request.getRequestDispatcher("resultado.jsp");
+        request.setAttribute("mensagem", mensagem);
         dispatcher.forward(request, response);
 
     }

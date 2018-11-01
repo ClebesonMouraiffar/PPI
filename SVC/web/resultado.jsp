@@ -12,7 +12,12 @@
         <title>JSP Page</title>
     </head>
     <body>
-        <%=request.getAttribute("mensagem")%>
+        <%
+            String mensagem = request.getAttribute("mensagem").toString();
+            out.print(mensagem);
+        %>
+        <br>
+        <a href="index.jsp">OK</a>
                 
     </body>
 </html>

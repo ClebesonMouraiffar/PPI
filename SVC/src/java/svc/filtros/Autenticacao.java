@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package filtros;
+package svc.filtros;
 
 import java.io.IOException;
 import java.io.PrintStream;
@@ -36,8 +36,10 @@ public class Autenticacao implements Filter {
         HttpSession sessao = requisicao.getSession();
 
         if ((sessao.getAttribute("logado") != null)
+                || requisicao.getRequestURI().endsWith("registro.jsp")
+                || requisicao.getRequestURI().endsWith("registro")
                 || requisicao.getRequestURI().endsWith("login.jsp")
-                || requisicao.getRequestURI().endsWith("LoginController")) {
+                || requisicao.getRequestURI().endsWith("login")) {
             chain.doFilter(request, response);
         } else {
             HttpServletResponse resposta = (HttpServletResponse) response;

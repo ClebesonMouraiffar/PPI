@@ -4,7 +4,7 @@
     Author     : LAB
 --%>
 
-<%@page import="svc.model.UsuarioModel"%>
+<%@page import="svc.model.VeiculoModel"%>
 <%@page import="java.text.SimpleDateFormat"%>
 <%@page import="java.util.Date"%>
 <%@page import="java.util.ArrayList"%>
@@ -17,8 +17,8 @@
     </head>
     <body>
         <%        
-            ArrayList<UsuarioModel> lista = 
-                    (ArrayList<UsuarioModel>)request.getAttribute("lista");            
+            ArrayList<VeiculoModel> lista = 
+                    (ArrayList<VeiculoModel>)request.getAttribute("lista");            
             
         %>
         <a href="./index.jsp">Home</a>
@@ -26,20 +26,19 @@
         <table>
             <tr>
                 <td>Código</td>
-                <td>Nome</td>
-                <td>Data de Nascimento</td>
+                <td>Placa</td>
+                <td>Descrição</td>
                 <td>Ações</td>
             </tr>
             <%
-                for(UsuarioModel u : lista){
+                for(VeiculoModel u : lista){
              %>
              <tr>
                  <td><%=u.getId()%></td>
-                 <td><%=u.getNome()%></td>
-                 <td><%=new SimpleDateFormat("dd/MM/yyyy")
-                         .format(u.getDataNascimento())%></td>
-                 <td><a href="./usuario?acao=del&id=<%=u.getId()%>">Apagar</a>
-                     <a href="./usuario?acao=editar&id=<%=u.getId()%>">Editar</a>
+                 <td><%=u.getPlaca()%></td>
+                 <td><%=u.getDescricao()%></td>
+                 <td><a href="./veiculo?acao=del&id=<%=u.getId()%>">Apagar</a>
+                     <a href="./veiculo?acao=editar&id=<%=u.getId()%>">Editar</a>
                  </td>
              </tr>
               <% 

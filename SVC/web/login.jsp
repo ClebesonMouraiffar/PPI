@@ -12,7 +12,7 @@
         <title>JSP Page</title>
     </head>
     <body>
-        <form action="./LoginController" method="POST">
+        <form action="./login" method="POST">
             Usuario:<input name="login"/>
             Senha:<input name="senha" type="text"/>
             <input type="submit" value="Entrar no sistema"/>

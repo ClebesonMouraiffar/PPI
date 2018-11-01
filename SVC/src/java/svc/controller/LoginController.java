@@ -3,22 +3,24 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package controller;
+package svc.controller;
 
-import dao.UsuarioDao;
+import svc.dao.UsuarioDao;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import model.UsuarioModel;
+import svc.model.UsuarioModel;
 
 /**
  *
  * @author LAB
  */
+@WebServlet(name = "login", urlPatterns = {"/login"})
 public class LoginController extends HttpServlet {
 
     @Override
@@ -38,7 +40,7 @@ public class LoginController extends HttpServlet {
         String senha = request.getParameter("senha");
          
         UsuarioModel model
-                = new UsuarioDao().buscar(nome, senha);
+                = new UsuarioDao().login(nome, senha);
 
         if (model.getId() != 0) {
             request.getSession().setAttribute("logado", model);

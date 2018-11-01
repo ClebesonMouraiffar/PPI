@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package dao;
+package svc.dao;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -28,7 +28,7 @@ public class Conexao {
         Connection conexao=null;
         try {
 
-            conexao = DriverManager.getConnection("jdbc:mysql://localhost/javaweb", "root", "");
+            conexao = DriverManager.getConnection("jdbc:mysql://localhost/svc", "root", "");
             if (!conexao.isClosed()) {
                 System.out.println("Conexão realizada com sucesso");
             }

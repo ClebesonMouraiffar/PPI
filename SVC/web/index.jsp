@@ -4,7 +4,8 @@
     Author     : LAB
 --%>
 
-<%@page import="model.UsuarioModel"%>
+
+<%@page import="svc.model.UsuarioModel"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -17,7 +18,19 @@
             UsuarioModel modelo = (UsuarioModel) request.getSession().getAttribute("logado");
             out.println("Bem Vindo");
         %>
+        <br>
+        <a href="./registro">Registrar Uso</a>
+        <br>
+        <a href="#">Listar Uso</a>
+        <br>
         <a href="./cadastrarUsuario.jsp">Cadastrar Usuário</a>
-        <a href="./UsuarioController">Listar Usuários</a>
+        <br>
+        <a href="./usuarios">Listar Usuários</a>
+        <br>
+        <a href="./cadastrarVeiculo.jsp">Cadastrar Veiculos</a>
+        <br>
+        <a href="./veiculos">Listar Veiculos</a>
+        <br>
+        
     </body>
 </html>
