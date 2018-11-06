@@ -5,7 +5,6 @@
  */
 package svc.model;
 
-import java.util.Date;
 import java.util.List;
 import svc.dao.UsuarioDao;
 
@@ -17,10 +16,10 @@ public class UsuarioModel {
 
     private int id;
     private String nome;
+    private String login;
     private String senha;
-    private Date dataNascimento;
 
-  //getters e setters
+    //getters e setters
     public int getId() {
         return id;
     }
@@ -45,12 +44,12 @@ public class UsuarioModel {
         this.senha = senha;
     }
 
-    public Date getDataNascimento() {
-        return dataNascimento;
+    public String getLogin() {
+        return login;
     }
 
-    public void setDataNascimento(Date dataNascimento) {
-        this.dataNascimento = dataNascimento;
+    public void setLogin(String login) {
+        this.login = login;
     }
 
     public void listar() {

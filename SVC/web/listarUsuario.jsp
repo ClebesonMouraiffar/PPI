@@ -27,7 +27,7 @@
             <tr>
                 <td>Código</td>
                 <td>Nome</td>
-                <td>Data de Nascimento</td>
+                <td>Login</td>
                 <td>Ações</td>
             </tr>
             <%
@@ -36,8 +36,7 @@
              <tr>
                  <td><%=u.getId()%></td>
                  <td><%=u.getNome()%></td>
-                 <td><%=new SimpleDateFormat("dd/MM/yyyy")
-                         .format(u.getDataNascimento())%></td>
+                 <td><%=u.getLogin()%></td>
                  <td><a href="./usuario?acao=del&id=<%=u.getId()%>">Apagar</a>
                      <a href="./usuario?acao=editar&id=<%=u.getId()%>">Editar</a>
                  </td>

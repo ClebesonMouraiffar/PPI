@@ -17,6 +17,7 @@ public class VeiculoModel {
     private int id;
     private String placa;
     private String descricao;
+    private boolean disponibilidade;
 
     //getters e setters
     public int getId() {
@@ -43,15 +44,19 @@ public class VeiculoModel {
         this.descricao = descricao;
     }
 
+    public boolean isDisponibilidade() {
+        return disponibilidade;
+    }
+
+    public void setDisponibilidade(boolean disponibilidade) {
+        this.disponibilidade = disponibilidade;
+    }
+
     public void listar() {
         List<VeiculoModel> lista = new VeiculoDao().buscar();
         for (VeiculoModel veiculo : lista) {
             System.out.println(veiculo.toString());
         }
-    }
-
-    public Object getDataNascimento() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
 }

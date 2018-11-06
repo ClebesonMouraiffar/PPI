@@ -29,11 +29,9 @@ public class UsuarioDao implements DAO<UsuarioModel> {
 
             while (resultado.next()) {
                 UsuarioModel usuarioM = new UsuarioModel();
-                usuarioM.setId(resultado.getInt("id"));
+                usuarioM.setId(resultado.getInt("idusuario"));
                 usuarioM.setNome(resultado.getString("nome"));
-                //Date sql -> date util
-                java.util.Date data = resultado.getDate("data_nascimento");
-                usuarioM.setDataNascimento(data);
+                usuarioM.setLogin(resultado.getString("login"));
                 lista.add(usuarioM);
             }
         } catch (Exception e) {
@@ -51,15 +49,15 @@ public class UsuarioDao implements DAO<UsuarioModel> {
         try {
             Connection conect = new Conexao().abrirConexao();
             PreparedStatement statement
-                    = conect.prepareStatement("select * from  "+ tabela +" where id=?");
+                    = conect.prepareStatement("select * from  "+ tabela +" where idusuario=?");
             statement.setInt(1, id);
             ResultSet resultado = statement.executeQuery();
             while (resultado.next()) {
-                usuarioM.setId(resultado.getInt("id"));
+                usuarioM.setId(resultado.getInt("idusuario"));
                 usuarioM.setNome(resultado.getString("nome"));
+                usuarioM.setLogin(resultado.getString("login"));
                 usuarioM.setSenha(resultado.getString("senha"));
-                java.util.Date data = resultado.getDate("data_nascimento");
-                usuarioM.setDataNascimento(data);
+                
             }
             resultado.close();
             statement.close();
@@ -70,19 +68,19 @@ public class UsuarioDao implements DAO<UsuarioModel> {
         }
     }
 
-    public UsuarioModel login(String nome, String senha) {
+    public UsuarioModel login(String login, String senha) {
         UsuarioModel usuarioM = new UsuarioModel();
 
         try {
             Connection conect = new Conexao().abrirConexao();
             PreparedStatement statement
-                    = conect.prepareStatement("select * from "+ tabela +" where nome=? and senha=?");
-            statement.setString(1, nome);
+                    = conect.prepareStatement("select * from "+ tabela +" where login=? and senha=?");
+            statement.setString(1, login);
             statement.setString(2, senha);
             ResultSet resultado = statement.executeQuery();
             while (resultado.next()) {
-                usuarioM.setId(resultado.getInt("id"));
-                usuarioM.setNome(resultado.getString("nome"));
+                usuarioM.setId(resultado.getInt("idusuario"));
+                usuarioM.setLogin(resultado.getString("login"));
             }
             resultado.close();
             statement.close();
@@ -99,15 +97,10 @@ public class UsuarioDao implements DAO<UsuarioModel> {
         Connection conect = conexao.abrirConexao();
         try {
             PreparedStatement statement = conect.prepareStatement(
-                    "insert into "+ tabela +"(nome,senha,data_nascimento) values (?,?,?)");
+                    "insert into "+ tabela +"(nome,login,senha) values (?,?,?)");
             statement.setString(1, usuarioM.getNome());
-            statement.setString(2, usuarioM.getSenha());
-
-            //Date util -> Date sql            
-            java.sql.Date data_nascimento
-                    = new java.sql.Date(usuarioM.getDataNascimento().getTime());
-
-            statement.setDate(3, data_nascimento);
+            statement.setString(2, usuarioM.getLogin());
+            statement.setString(3, usuarioM.getSenha());
 
             statement.execute();
             return true;
@@ -124,12 +117,10 @@ public class UsuarioDao implements DAO<UsuarioModel> {
         try {
             Connection conect = new Conexao().abrirConexao();
             PreparedStatement statement
-                    = conect.prepareStatement("update "+ tabela +" set nome = ?, senha = ?, data_nascimento = ? where id = ?");
+                    = conect.prepareStatement("update "+ tabela +" set nome = ?, login = ?, senha = ? where idusuario = ?");
             statement.setString(1, usuarioM.getNome());
-            statement.setString(2, usuarioM.getSenha());
-            java.sql.Date data_nascimento
-                    = new java.sql.Date(usuarioM.getDataNascimento().getTime());
-            statement.setDate(3, data_nascimento);
+            statement.setString(2, usuarioM.getLogin());
+            statement.setString(3, usuarioM.getSenha());
             statement.setInt(4, usuarioM.getId());
             statement.executeUpdate();
 
@@ -145,7 +136,7 @@ public class UsuarioDao implements DAO<UsuarioModel> {
     @Override
     public boolean apagar(int id) {
         Connection conect = new Conexao().abrirConexao();
-        String sql = "delete from "+ tabela +" where id=?";
+        String sql = "delete from "+ tabela +" where idusuario=?";
         try {
             PreparedStatement statement = conect.prepareStatement(sql);
             statement.setInt(1, id);

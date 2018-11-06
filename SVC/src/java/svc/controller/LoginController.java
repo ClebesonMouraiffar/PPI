@@ -7,7 +7,6 @@ package svc.controller;
 
 import svc.dao.UsuarioDao;
 import java.io.IOException;
-import java.io.PrintWriter;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -36,14 +35,14 @@ public class LoginController extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
-        String nome = request.getParameter("login");
+        String login = request.getParameter("login");
         String senha = request.getParameter("senha");
          
-        UsuarioModel model
-                = new UsuarioDao().login(nome, senha);
+        UsuarioModel usuarioM
+                = new UsuarioDao().login(login, senha);
 
-        if (model.getId() != 0) {
-            request.getSession().setAttribute("logado", model);
+        if (usuarioM.getId() != 0) {
+            request.getSession().setAttribute("logado", usuarioM);
             response.sendRedirect("index.jsp");
         } else {
             response.sendRedirect("login.jsp");

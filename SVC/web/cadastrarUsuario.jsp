@@ -17,13 +17,11 @@
         <form action="usuario" method="POST">
             Nome: <input name="nome">
             <br>
+            Login: <input name="login">
+            <br>
             Senha: <input name="senha">
             <br>
-            Data de Nascimento: <input pattern="(0[1-9]|[12][0-9]|3[01])[- /.](0[1-9]|1[012])[- /.](19|20)\d\d"
-                                       placeholder="dd/mm/aaaa" name="data_nascimento">
-            <br>
-            <input type="submit" value="Enviar">
-            
+            <input type="submit" value="Cadastrar">            
         </form>
     </body>
 </html>

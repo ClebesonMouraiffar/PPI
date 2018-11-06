@@ -15,23 +15,20 @@
     </head>
     <body>
         <%
-            UsuarioModel modelo = (UsuarioModel) request.getAttribute("usuario");
+            UsuarioModel usuarioM = (UsuarioModel) request.getAttribute("usuario");
         %>
         <a href="./index.jsp">Home</a>
         <br>
-        <form action="usuario?id=<%=modelo.getId()%>" method="POST" accept-charset="UTF-8">
-            ID: <input name="id" value="<%=modelo.getId()%>" readonly=""/>
+        <form action="usuario?id=<%=usuarioM.getId()%>" method="POST" accept-charset="UTF-8">
+            ID: <input name="id" value="<%=usuarioM.getId()%>" readonly=""/>
             <br>
-            Nome: <input name="nome" value="<%=modelo.getNome()%>">
+            Nome: <input name="nome" value="<%=usuarioM.getNome()%>">
             <br>
-            Senha: <input name="senha" value="<%=modelo.getSenha()%>">
+            Login: <input name="login" value="<%=usuarioM.getLogin()%>">
             <br>
-            Data de Nascimento: <input pattern="(0[1-9]|[12][0-9]|3[01])[- /.](0[1-9]|1[012])[- /.](19|20)\d\d"
-                                       placeholder="dd/mm/aaaa" name="data_nascimento" 
-                                       value="<%=new SimpleDateFormat("dd/MM/yyyy")
-                         .format(modelo.getDataNascimento())%>">
+            Senha: <input name="senha" value="<%=usuarioM.getSenha()%>">
             <br>
-            <input type="submit" value="Cadastrar">
+            <input type="submit" value="Salvar">
         </form>
     </body>
 </html>

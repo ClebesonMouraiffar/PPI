@@ -31,7 +31,7 @@ public class VeiculoDao implements DAO<VeiculoModel> {
 
             while (resultado.next()) {
                 VeiculoModel veiculoM = new VeiculoModel();
-                veiculoM.setId(resultado.getInt("id"));
+                veiculoM.setId(resultado.getInt("idveiculo"));
                 veiculoM.setPlaca(resultado.getString("placa"));
                 veiculoM.setDescricao(resultado.getString("descricao"));
                 lista.add(veiculoM);
@@ -51,11 +51,11 @@ public class VeiculoDao implements DAO<VeiculoModel> {
         try {
             Connection conect = new Conexao().abrirConexao();
             PreparedStatement statement
-                    = conect.prepareStatement("select * from "+ tabela +" where id=?");
+                    = conect.prepareStatement("select * from "+ tabela +" where idveiculo=?");
             statement.setInt(1, id);
             ResultSet resultado = statement.executeQuery();
             while (resultado.next()) {
-                veiculoM.setId(resultado.getInt("id"));
+                veiculoM.setId(resultado.getInt("idveiculo"));
                 veiculoM.setPlaca(resultado.getString("placa"));
                 veiculoM.setDescricao(resultado.getString("descricao"));
             }
@@ -91,7 +91,7 @@ public class VeiculoDao implements DAO<VeiculoModel> {
         try {
             Connection conect = new Conexao().abrirConexao();
             PreparedStatement statement
-                    = conect.prepareStatement("update "+ tabela +" set placa = ?,  descricao = ? where id = ?");
+                    = conect.prepareStatement("update "+ tabela +" set placa = ?,  descricao = ? where idveiculo = ?");
             statement.setString(1, veiculoM.getPlaca());
             statement.setString(2, veiculoM.getDescricao());
             statement.setInt(3, veiculoM.getId());
@@ -109,7 +109,7 @@ public class VeiculoDao implements DAO<VeiculoModel> {
     @Override
     public boolean apagar(int id) {
         Connection conect = new Conexao().abrirConexao();
-        String sql = "delete from "+ tabela +" where id=?";
+        String sql = "delete from "+ tabela +" where idveiculo=?";
         try {
             PreparedStatement statement = conect.prepareStatement(sql);
             statement.setInt(1, id);

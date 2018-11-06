@@ -17,12 +17,11 @@ public class UsoModel {
 
     private int id;
     private LocalDateTime saida;
-    private LocalDateTime chegada;
+    private LocalDateTime retorno;
     private int usuario;
     private int veiculo;
 
     //geters e seters
-    
     public int getUsuario() {
         return usuario;
     }
@@ -55,12 +54,12 @@ public class UsoModel {
         this.saida = saida;
     }
 
-    public LocalDateTime getChegada() {
-        return chegada;
+    public LocalDateTime getRetorno() {
+        return retorno;
     }
 
-    public void setChegada(LocalDateTime chegada) {
-        this.chegada = chegada;
+    public void setRetorno(LocalDateTime retorno) {
+        this.retorno = retorno;
     }
 
     public void listar() {
@@ -69,4 +68,5 @@ public class UsoModel {
             System.out.println(uso.toString());
         }
     }
+
 }

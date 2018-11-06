@@ -7,8 +7,6 @@ package svc.controller;
 
 import svc.dao.UsuarioDao;
 import java.io.IOException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -55,24 +53,14 @@ public class UsuarioController extends HttpServlet {
             throws ServletException, IOException {
 
         UsuarioModel usuarioM = new UsuarioModel();
+        
         request.setCharacterEncoding("UTF-8");
+        
         usuarioM.setNome(request.getParameter("nome"));
+        usuarioM.setLogin(request.getParameter("login"));
         usuarioM.setSenha(request.getParameter("senha"));
         String id = request.getParameter("id");
-
-        //string -> date  
-        try {
-            SimpleDateFormat simpleDateFormat
-                    = new SimpleDateFormat("dd/MM/yyyy");
-
-            Date date = simpleDateFormat.
-                    parse(request.getParameter("data_nascimento"));
-
-            usuarioM.setDataNascimento(date);
-        } catch (Exception e) {
-            usuarioM.setDataNascimento(null);
-        }
-
+        
         UsuarioDao usuarioD = new UsuarioDao();
         String mensagem = "null";
 
