@@ -31,7 +31,14 @@ public class RegistroController extends HttpServlet {
             throws ServletException, IOException {
         VeiculoDao veiculoD = new VeiculoDao();
         String pagina = "./registro.jsp";
-        request.setAttribute("lista", veiculoD.buscar());
+        String acao = request.getParameter("acao");
+        if (acao.equals("list")) {
+            UsoDao usoD = new UsoDao();
+            request.setAttribute("lista", usoD.buscar());
+            pagina = "./listarUsos.jsp";
+        } else {
+            request.setAttribute("lista", veiculoD.buscar());
+        }
         RequestDispatcher view = request.getRequestDispatcher(pagina);
         view.forward(request, response);
     }
@@ -65,8 +72,8 @@ public class RegistroController extends HttpServlet {
             } catch (Exception e) {
                 usoM.setRetorno(null);
             }
-            usoM.setUsuario(usuarioM.getId());
-            usoM.setVeiculo(Integer.parseInt(id));
+            usoM.setIdUsuario(usuarioM.getId());
+            usoM.setIdVeiculo(Integer.parseInt(id));
             //inserir no Banco
             if (usoD.inserir(usoM)) {
                 mensagem = "Uso registrado";

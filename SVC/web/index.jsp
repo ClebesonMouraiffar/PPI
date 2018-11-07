@@ -21,7 +21,7 @@
         <br>
         <a href="./registro">Registrar Uso</a>
         <br>
-        <a href="#">Listar Uso</a>
+        <a href="./registro?acao=list">Listar Uso</a>
         <br>
         <a href="./cadastrarUsuario.jsp">Cadastrar Usuário</a>
         <br>

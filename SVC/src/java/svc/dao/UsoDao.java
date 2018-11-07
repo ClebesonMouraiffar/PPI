@@ -8,7 +8,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Timestamp;
-import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 import svc.model.UsoModel;
@@ -32,8 +32,11 @@ public class UsoDao implements DAO<UsoModel> {
 
             while (resultado.next()) {
                 UsoModel usoM = new UsoModel();
-                usoM.setId(resultado.getInt("id"));
-                //Date sql -> date util
+                usoM.setId(resultado.getInt("iduso"));
+                usoM.setSaida(resultado.getTimestamp("saida").toLocalDateTime());
+                usoM.setRetorno(resultado.getTimestamp("retorno").toLocalDateTime());
+                usoM.setIdUsuario(resultado.getInt("idusuario"));
+                usoM.setIdVeiculo(resultado.getInt("idveiculo"));
                 lista.add(usoM);
             }
         } catch (Exception e) {
@@ -75,8 +78,8 @@ public class UsoDao implements DAO<UsoModel> {
             //data loca -> data sql
             statement.setTimestamp(1, Timestamp.valueOf(usoM.getSaida()));
             statement.setTimestamp(2, Timestamp.valueOf(usoM.getRetorno()));
-            statement.setInt(3, usoM.getUsuario());
-            statement.setInt(4, usoM.getVeiculo());
+            statement.setInt(3, usoM.getIdUsuario());
+            statement.setInt(4, usoM.getIdVeiculo());
             
             statement.execute();
             return true;
