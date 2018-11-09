@@ -24,7 +24,7 @@ import svc.model.UsuarioModel;
  * @author LAB
  */
 @WebServlet(name = "registro", urlPatterns = {"/registro"})
-public class RegistroController extends HttpServlet {
+public class UsoController extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
@@ -32,7 +32,7 @@ public class RegistroController extends HttpServlet {
         VeiculoDao veiculoD = new VeiculoDao();
         String pagina = "./registro.jsp";
         String acao = request.getParameter("acao");
-        if (acao.equals("list")) {
+        if (acao != null && acao.equals("list")) {
             UsoDao usoD = new UsoDao();
             request.setAttribute("lista", usoD.buscar());
             pagina = "./listarUsos.jsp";
@@ -65,12 +65,6 @@ public class RegistroController extends HttpServlet {
                 usoM.setSaida(dataHora);
             } catch (Exception e) {
                 usoM.setSaida(null);
-            }
-            try {
-                LocalDateTime dataHora2 = LocalDateTime.now();
-                usoM.setRetorno(dataHora2);
-            } catch (Exception e) {
-                usoM.setRetorno(null);
             }
             usoM.setIdUsuario(usuarioM.getId());
             usoM.setIdVeiculo(Integer.parseInt(id));

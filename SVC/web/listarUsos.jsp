@@ -4,6 +4,7 @@
     Author     : LAB
 --%>
 
+<%@page import="java.io.PrintWriter"%>
 <%@page import="java.time.format.DateTimeFormatter"%>
 <%@page import="svc.model.UsoModel"%>
 <%@page import="java.text.SimpleDateFormat"%>
@@ -31,7 +32,6 @@
                 <td>Retorno</td>
                 <td>Usuario</td>
                 <td>Veiculo</td>
-                <td>Ações</td>
             </tr>
             <%
                 for(UsoModel u : lista){
@@ -39,15 +39,16 @@
              %>
              <tr>
                  <td><%=u.getId()%></td>
-                 <td><%=u.getSaida().
-                         format(formatter)%></td>
-                 <td><%=u.getRetorno().
-                         format(formatter)%></td>
-                 <td><%=u.getUsuario()%></td>
-                 <td><%=u.getVeiculo()%></td>
-                 <td><a href="./usuario?acao=del&id=<%=u.getId()%>">Apagar</a>
-                     <a href="./usuario?acao=editar&id=<%=u.getId()%>">Editar</a>
-                 </td>
+                 <td><%if(u.getSaida()!= null){
+                    out.print(u.getSaida().format(formatter));
+                 }%></td>
+                 <td><%if(u.getRetorno()!= null){
+                      out.print(u.getRetorno().format(formatter));
+                 } else{
+                     out.print("Em Uso");
+                 }%></td>
+                 <td><%=u.getNomeUsuario()%></td>
+                 <td><%=u.getPlacaVeiculo()%></td>
              </tr>
               <% 
                 }

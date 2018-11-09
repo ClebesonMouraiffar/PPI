@@ -4,16 +4,15 @@
  * and open the template in the editor.
  */
 package svc.dao;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Timestamp;
-import java.time.format.DateTimeFormatter;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import svc.model.UsoModel;
-
-
 
 public class UsoDao implements DAO<UsoModel> {
 
@@ -27,16 +26,29 @@ public class UsoDao implements DAO<UsoModel> {
         Connection conect = conexao.abrirConexao();
         try {
             PreparedStatement statement = conect.prepareStatement(
-                    "select * from "+ tabela +"");
+                    "select u.iduso, "
+                    + "u.saida, "
+                    + "u.retorno,"
+                    + "us.nome, "
+                    + "v.placa "
+                    + "from " + tabela + " u "
+                    + "inner join usuario us on (u.idusuario = us.idusuario) "
+                    + "inner join veiculo V on (U.idveiculo = V.idveiculo)");
             ResultSet resultado = statement.executeQuery();
 
             while (resultado.next()) {
                 UsoModel usoM = new UsoModel();
                 usoM.setId(resultado.getInt("iduso"));
                 usoM.setSaida(resultado.getTimestamp("saida").toLocalDateTime());
-                usoM.setRetorno(resultado.getTimestamp("retorno").toLocalDateTime());
-                usoM.setIdUsuario(resultado.getInt("idusuario"));
-                usoM.setIdVeiculo(resultado.getInt("idveiculo"));
+                //verifica data de retorno nula
+                LocalDateTime retorno = resultado.getTimestamp("retorno").toLocalDateTime();
+                if (retorno  == null) {
+                    
+                }
+                
+                   usoM.setRetorno(retorno);
+                usoM.setNomeUsuario(resultado.getString("nome"));
+                usoM.setPlacaVeiculo(resultado.getString("placa"));
                 lista.add(usoM);
             }
         } catch (Exception e) {
@@ -54,11 +66,35 @@ public class UsoDao implements DAO<UsoModel> {
         try {
             Connection conect = new Conexao().abrirConexao();
             PreparedStatement statement
-                    = conect.prepareStatement("select * from "+ tabela +" where id=?");
+                    = conect.prepareStatement("select * from " + tabela + " where id=?");
             statement.setInt(1, id);
             ResultSet resultado = statement.executeQuery();
             while (resultado.next()) {
                 usoM.setId(resultado.getInt("id"));
+            }
+            resultado.close();
+            statement.close();
+        } catch (Exception e) {
+            return null;
+        } finally {
+            return usoM;
+        }
+    }
+
+    public UsoModel buscarUltimo() {
+        UsoModel usoM = new UsoModel();
+
+        try {
+            Connection conect = new Conexao().abrirConexao();
+            PreparedStatement statement
+                    = conect.prepareStatement("SELECT * FROM uso ORDER BY iduso DESC LIMIT 1");
+            ResultSet resultado = statement.executeQuery();
+            while (resultado.next()) {
+                usoM.setId(resultado.getInt("iduso"));
+                usoM.setSaida(resultado.getTimestamp("saida").toLocalDateTime());
+                usoM.setRetorno(resultado.getTimestamp("retorno").toLocalDateTime());
+                usoM.setNomeUsuario(resultado.getString("nome"));
+                usoM.setPlacaVeiculo(resultado.getString("placa"));
             }
             resultado.close();
             statement.close();
@@ -74,13 +110,12 @@ public class UsoDao implements DAO<UsoModel> {
         Connection conect = conexao.abrirConexao();
         try {
             PreparedStatement statement = conect.prepareStatement(
-                    "insert into "+ tabela +"(saida, retorno, idusuario, idveiculo) values (?,?,?,?)");
+                    "insert into " + tabela + "(saida, retorno, idusuario, idveiculo) values (?,NULL,?,?)");
             //data loca -> data sql
             statement.setTimestamp(1, Timestamp.valueOf(usoM.getSaida()));
-            statement.setTimestamp(2, Timestamp.valueOf(usoM.getRetorno()));
-            statement.setInt(3, usoM.getIdUsuario());
-            statement.setInt(4, usoM.getIdVeiculo());
-            
+            statement.setInt(2, usoM.getIdUsuario());
+            statement.setInt(3, usoM.getIdVeiculo());
+
             statement.execute();
             return true;
 
@@ -96,7 +131,7 @@ public class UsoDao implements DAO<UsoModel> {
         try {
             Connection conect = new Conexao().abrirConexao();
             PreparedStatement statement
-                    = conect.prepareStatement("update "+ tabela +" set placa = ?,  descricao = ? where id = ?");
+                    = conect.prepareStatement("update " + tabela + " set placa = ?,  descricao = ? where id = ?");
             statement.setInt(3, usoM.getId());
             statement.executeUpdate();
 
@@ -112,7 +147,7 @@ public class UsoDao implements DAO<UsoModel> {
     @Override
     public boolean apagar(int id) {
         Connection conect = new Conexao().abrirConexao();
-        String sql = "delete from "+ tabela +" where iduso=?";
+        String sql = "delete from " + tabela + " where iduso=?";
         try {
             PreparedStatement statement = conect.prepareStatement(sql);
             statement.setInt(1, id);
