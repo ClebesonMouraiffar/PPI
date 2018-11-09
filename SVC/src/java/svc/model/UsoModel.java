@@ -5,7 +5,6 @@
  */
 package svc.model;
 
-import java.time.LocalDateTime;
 import java.util.List;
 import svc.dao.UsoDao;
 
@@ -16,37 +15,20 @@ import svc.dao.UsoDao;
 public class UsoModel {
 
     private int id;
-    private LocalDateTime saida;
-    private LocalDateTime retorno;
+    private String saida;
+    private String retorno;
     private int idUsuario;
     private int idVeiculo;
     private String nomeUsuario;
     private String placaVeiculo;
 
     //geters e seters
-
     public int getId() {
         return id;
     }
 
     public void setId(int id) {
         this.id = id;
-    }
-
-    public LocalDateTime getSaida() {
-        return saida;
-    }
-
-    public void setSaida(LocalDateTime saida) {
-        this.saida = saida;
-    }
-
-    public LocalDateTime getRetorno() {
-        return retorno;
-    }
-
-    public void setRetorno(LocalDateTime retorno) {
-        this.retorno = retorno;
     }
 
     public int getIdUsuario() {
@@ -80,7 +62,23 @@ public class UsoModel {
     public void setPlacaVeiculo(String placaVeiculo) {
         this.placaVeiculo = placaVeiculo;
     }
-    
+
+    public String getSaida() {
+        return saida;
+    }
+
+    public void setSaida(String saida) {
+        this.saida = saida;
+    }
+
+    public String getRetorno() {
+        return retorno;
+    }
+
+    public void setRetorno(String retorno) {
+        this.retorno = retorno;
+    }
+
     public void listar() {
         List<UsoModel> lista = new UsoDao().buscar();
         for (UsoModel uso : lista) {

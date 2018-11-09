@@ -39,11 +39,9 @@
              %>
              <tr>
                  <td><%=u.getId()%></td>
-                 <td><%if(u.getSaida()!= null){
-                    out.print(u.getSaida().format(formatter));
-                 }%></td>
+                 <td><%=u.getSaida()%></td>
                  <td><%if(u.getRetorno()!= null){
-                      out.print(u.getRetorno().format(formatter));
+                      out.print(u.getRetorno());
                  } else{
                      out.print("Em Uso");
                  }%></td>

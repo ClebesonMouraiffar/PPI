@@ -9,7 +9,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Timestamp;
-import java.time.LocalDateTime;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 import svc.model.UsoModel;
@@ -39,14 +39,18 @@ public class UsoDao implements DAO<UsoModel> {
             while (resultado.next()) {
                 UsoModel usoM = new UsoModel();
                 usoM.setId(resultado.getInt("iduso"));
-                usoM.setSaida(resultado.getTimestamp("saida").toLocalDateTime());
-                //verifica data de retorno nula
-                LocalDateTime retorno = resultado.getTimestamp("retorno").toLocalDateTime();
-                if (retorno  == null) {
-                    
+                //tratamento da Data e Hora de Saida
+                Timestamp saida = resultado.getTimestamp("saida");
+                String strsaida = new SimpleDateFormat("dd/MM/yyyy HH:mm").format(saida);
+                usoM.setSaida(strsaida);
+                try {
+                    //tratamento da Data e Hora de Retorno
+                    Timestamp retorno = resultado.getTimestamp("retorno");
+                    String strretorno = new SimpleDateFormat("dd/MM/yyyy HH:mm").format(retorno);
+                    usoM.setRetorno(strretorno);
+                } catch (Exception e) {
+                    usoM.setRetorno(null);
                 }
-                
-                   usoM.setRetorno(retorno);
                 usoM.setNomeUsuario(resultado.getString("nome"));
                 usoM.setPlacaVeiculo(resultado.getString("placa"));
                 lista.add(usoM);
@@ -91,8 +95,8 @@ public class UsoDao implements DAO<UsoModel> {
             ResultSet resultado = statement.executeQuery();
             while (resultado.next()) {
                 usoM.setId(resultado.getInt("iduso"));
-                usoM.setSaida(resultado.getTimestamp("saida").toLocalDateTime());
-                usoM.setRetorno(resultado.getTimestamp("retorno").toLocalDateTime());
+                //usoM.setSaida(resultado.getTimestamp("saida").toLocalDateTime());
+                //usoM.setRetorno(resultado.getTimestamp("retorno").toLocalDateTime());
                 usoM.setNomeUsuario(resultado.getString("nome"));
                 usoM.setPlacaVeiculo(resultado.getString("placa"));
             }
@@ -110,12 +114,9 @@ public class UsoDao implements DAO<UsoModel> {
         Connection conect = conexao.abrirConexao();
         try {
             PreparedStatement statement = conect.prepareStatement(
-                    "insert into " + tabela + "(saida, retorno, idusuario, idveiculo) values (?,NULL,?,?)");
-            //data loca -> data sql
-            statement.setTimestamp(1, Timestamp.valueOf(usoM.getSaida()));
-            statement.setInt(2, usoM.getIdUsuario());
-            statement.setInt(3, usoM.getIdVeiculo());
-
+                    "insert into " + tabela + "(saida, retorno, idusuario, idveiculo) values (CURRENT_TIMESTAMP,NULL,?,?)");
+            statement.setInt(1, usoM.getIdUsuario());
+            statement.setInt(2, usoM.getIdVeiculo());
             statement.execute();
             return true;
 

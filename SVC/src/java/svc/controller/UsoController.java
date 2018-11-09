@@ -7,7 +7,6 @@ package svc.controller;
 
 import svc.dao.UsuarioDao;
 import java.io.IOException;
-import java.time.LocalDateTime;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -60,12 +59,6 @@ public class UsoController extends HttpServlet {
         String mensagem = "null";
 
         if (usuarioM.getId() != 0) {
-            try {
-                LocalDateTime dataHora = LocalDateTime.now();
-                usoM.setSaida(dataHora);
-            } catch (Exception e) {
-                usoM.setSaida(null);
-            }
             usoM.setIdUsuario(usuarioM.getId());
             usoM.setIdVeiculo(Integer.parseInt(id));
             //inserir no Banco
