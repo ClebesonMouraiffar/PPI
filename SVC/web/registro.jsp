@@ -86,16 +86,16 @@
                         <div class="form-group">
                             <div class="form-row">
                                 <div class="col-md-6">
-                                    <div class="form-label-group">
-                                        <input name="login" type="text" id="login" class="form-control" placeholder="Login" required="required" autofocus="autofocus">
+                                    
                                         <label for="login">Usuário</label>
-                                    </div>
+                                        <input name="login" type="text" id="login" class="form-control" placeholder="Login" required="required" autofocus="autofocus">
+                                     
                                     <p></div>
                                 <div class="col-md-6">
-                                    <div class="form-label-group">
+                                    <label for="senha">Senha</label>
                                         <input name="senha" type="password" id="senha" class="form-control" placeholder="Senha" required="required">
-                                        <label for="senha">Senha</label>
-                                    </div>
+                                        
+                                    
                                 </div>
                             </div>
                         </div>

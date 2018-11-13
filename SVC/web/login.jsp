@@ -34,7 +34,7 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
       crossorigin="anonymous"
 
-    <title>SVC - Login</title>
+   
 
     <!-- Bootstrap core CSS-->
     <link href="resources/vendor/bootstrap/css/bootstrap.min.css/>" rel="stylesheet">
@@ -55,16 +55,16 @@
         <div class="card-body">
           <form action="./login" method="POST">
             <div class="form-group">
-              <div class="form-label-group">
-                <input name="login" type="text" id="usuario" class="form-control" placeholder="Usu?rio" required="required" autofocus="autofocus">
-                <label for="inputEmail">Usuário</label>
-              </div>
+              
+                  <label for="inputEmail">Usuário</label>
+                <input name="login" type="text" id="usuario" class="form-control" placeholder="Usuário" required="required" autofocus="autofocus">
+                
             </div>
             <div class="form-group">
-              <div class="form-label-group">
+              
+                  <label for="inputPassword">Senha</label>
                 <input name="senha" type="password" id="senha" class="form-control" placeholder="Senha" required="required">
-                <label for="inputPassword">Senha</label>
-              </div>
+                
             </div>
             <div class="form-group">
               
