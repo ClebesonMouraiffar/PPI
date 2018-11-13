@@ -70,35 +70,19 @@ public class UsoDao implements DAO<UsoModel> {
         try {
             Connection conect = new Conexao().abrirConexao();
             PreparedStatement statement
-                    = conect.prepareStatement("select * from " + tabela + " where id=?");
+                    = conect.prepareStatement("SELECT * FROM uso WHERE idveiculo = ? ORDER BY iduso DESC LIMIT 1");
             statement.setInt(1, id);
             ResultSet resultado = statement.executeQuery();
             while (resultado.next()) {
-                usoM.setId(resultado.getInt("id"));
-            }
-            resultado.close();
-            statement.close();
-        } catch (Exception e) {
-            return null;
-        } finally {
-            return usoM;
-        }
-    }
-
-    public UsoModel buscarUltimo() {
-        UsoModel usoM = new UsoModel();
-
-        try {
-            Connection conect = new Conexao().abrirConexao();
-            PreparedStatement statement
-                    = conect.prepareStatement("SELECT * FROM uso ORDER BY iduso DESC LIMIT 1");
-            ResultSet resultado = statement.executeQuery();
-            while (resultado.next()) {
                 usoM.setId(resultado.getInt("iduso"));
-                //usoM.setSaida(resultado.getTimestamp("saida").toLocalDateTime());
-                //usoM.setRetorno(resultado.getTimestamp("retorno").toLocalDateTime());
-                usoM.setNomeUsuario(resultado.getString("nome"));
-                usoM.setPlacaVeiculo(resultado.getString("placa"));
+                try {
+                    //tratamento da Data e Hora de Retorno
+                    Timestamp retorno = resultado.getTimestamp("retorno");
+                    String strretorno = new SimpleDateFormat("dd/MM/yyyy HH:mm").format(retorno);
+                    usoM.setRetorno(strretorno);
+                } catch (Exception e) {
+                    usoM.setRetorno(null);
+                }
             }
             resultado.close();
             statement.close();
@@ -132,8 +116,8 @@ public class UsoDao implements DAO<UsoModel> {
         try {
             Connection conect = new Conexao().abrirConexao();
             PreparedStatement statement
-                    = conect.prepareStatement("update " + tabela + " set placa = ?,  descricao = ? where id = ?");
-            statement.setInt(3, usoM.getId());
+                    = conect.prepareStatement("update " + tabela + " set retorno =  CURRENT_TIMESTAMP where iduso = ?");
+            statement.setInt(1, usoM.getId());
             statement.executeUpdate();
 
             return true;

@@ -28,11 +28,11 @@ public class UsoController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        UsoDao usoD = new UsoDao();
         VeiculoDao veiculoD = new VeiculoDao();
         String pagina = "./registro.jsp";
         String acao = request.getParameter("acao");
         if (acao != null && acao.equals("list")) {
-            UsoDao usoD = new UsoDao();
             request.setAttribute("lista", usoD.buscar());
             pagina = "./listarUsos.jsp";
         } else {
@@ -48,7 +48,8 @@ public class UsoController extends HttpServlet {
 
         String nome = request.getParameter("login");
         String senha = request.getParameter("senha");
-        String id = request.getParameter("veiculo");
+        String idveiculo = request.getParameter("veiculo");
+        String iduso = request.getParameter("iduso");
 
         UsuarioModel usuarioM
                 = new UsuarioDao().login(nome, senha);
@@ -58,15 +59,35 @@ public class UsoController extends HttpServlet {
         UsoDao usoD = new UsoDao();
         String mensagem = "null";
 
+        UsoModel retornoUso = new UsoDao().buscar(Integer.parseInt(idveiculo));
+        
         if (usuarioM.getId() != 0) {
-            usoM.setIdUsuario(usuarioM.getId());
-            usoM.setIdVeiculo(Integer.parseInt(id));
-            //inserir no Banco
-            if (usoD.inserir(usoM)) {
-                mensagem = "Uso registrado";
+            
+            if (retornoUso.getRetorno()== null) {
+                usoM.setIdUsuario(usuarioM.getId());
+                usoM.setIdVeiculo(Integer.parseInt(idveiculo));
+                //inserir no Banco
+                if (usoD.inserir(usoM)) {
+                    mensagem = "Uso registrado";
+                } else {
+                    mensagem = "Erro registrar Uso";
+                }
             } else {
-                mensagem = "Erro registrar Uso";
+                usoM.setId(Integer.parseInt(iduso));
+                if (usoD.editar(usoM)) {
+                    usoM.setIdUsuario(usuarioM.getId());
+                    usoM.setIdVeiculo(Integer.parseInt(idveiculo));
+                    //inserir no Banco
+                    if (usoD.inserir(usoM)) {
+                        mensagem = "Uso devolvido e registrado";
+                    } else {
+                        mensagem = "Erro registrar Devolver/Registrar";
+                    }
+                } else{
+                    mensagem = "Erro registrar Uso: veiculo nao foi devolvido";
+                }
             }
+
             RequestDispatcher dispatcher = request.getRequestDispatcher("resultado.jsp");
             request.setAttribute("mensagem", mensagem);
             dispatcher.forward(request, response);

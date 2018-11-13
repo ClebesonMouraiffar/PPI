@@ -18,7 +18,7 @@ public class VeiculoDao implements DAO<VeiculoModel> {
 
     Conexao conexao;
     String tabela = "veiculo";
-
+   
     @Override
     public List<VeiculoModel> buscar() {
         List<VeiculoModel> lista = new ArrayList();

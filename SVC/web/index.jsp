@@ -23,14 +23,13 @@
         <br>
         <a href="./registro?acao=list">Listar Uso</a>
         <br>
-        <a href="./cadastrarUsuario.jsp">Cadastrar Usuário</a>
+        <a href="./cadastrarUsuario.jsp">Cadastrar Usu�rio</a>
         <br>
-        <a href="./usuarios">Listar Usuários</a>
+        <a href="./usuarios">Listar Usu�rios</a>
         <br>
         <a href="./cadastrarVeiculo.jsp">Cadastrar Veiculos</a>
         <br>
         <a href="./veiculos">Listar Veiculos</a>
         <br>
-        
     </body>
 </html>
