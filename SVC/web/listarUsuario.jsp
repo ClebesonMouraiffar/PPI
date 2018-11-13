@@ -101,14 +101,14 @@
             <!-- Sidebar -->
             <ul class="sidebar navbar-nav">
                 <li class="nav-item active">
-                    <a class="nav-link" href="index2.html">
+                    <a class="nav-link" href="index.jsp">
                         <i class="fas fa-fw"></i>
                         <span>Início</span>
                     </a>
                 </li>
 
                 <li class="nav-item active">
-                    <a class="nav-link" href="cadVeiculo.html">
+                    <a class="nav-link" href="./veiculos">
                         <i class="fas fa-fw"></i>
                         <span>Veículos</span>
                     </a>
@@ -182,7 +182,7 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <%                                        for (UsuarioModel u : lista) {
+                                    <% for (UsuarioModel u : lista) {
                                     %>
                                     <tr>
                                         <td><%=u.getId()%></td>

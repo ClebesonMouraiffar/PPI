@@ -38,7 +38,6 @@ public class VeiculoController extends HttpServlet {
                 boolean resultado = veiculoDao.apagar(Integer.parseInt(id));
                 request.setAttribute("lista", veiculoDao.buscar());
             } else {
-                pagina = "editarVeiculo.jsp";
                 request.setAttribute("veiculo", veiculoDao.buscar(Integer.parseInt(id)));
             }
         } else {

@@ -111,13 +111,13 @@
             <ul class="sidebar navbar-nav">
 
                 <li class="nav-item active">
-                    <a class="nav-link" href="cadFuncionario.html">
+                    <a class="nav-link" href="./usuarios">
                         <i class="fas fa-fw"></i>
                         <span>Funcionarios</span>
                     </a>
                 </li>
                 <li class="nav-item active">
-                    <a class="nav-link" href="cadVeiculo.html">
+                    <a class="nav-link" href="./veiculos">
                         <i class="fas fa-fw"></i>
                         <span>Veículos</span>
                     </a>
