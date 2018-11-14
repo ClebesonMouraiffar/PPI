@@ -158,10 +158,10 @@
                                 </tbody>
                                 <tfoot>
                                     <tr>
-                                        <th>Placa</th>
-                                        <th>Saída</th>
-                                        <th>Retorno</th>
-                                        <th>Retirado por</th>
+                                        <th>Codigo</th>
+                                        <th>Nome</th>
+                                        <th>Login</th>
+                                        <th>ações</th>
                                     </tr>
                                 </tfoot>                        
                             </table>
@@ -267,7 +267,7 @@
     <script src="resources/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
     <!-- Core plugin JavaScript-->
-    <script src="resources/endor/jquery-easing/jquery.easing.min.js"></script>
+    <script src="resources/vendor/jquery-easing/jquery.easing.min.js"></script>
 
     <!-- Page level plugin JavaScript-->
     <script src="resources/vendor/chart.js/Chart.min.js"></script>
