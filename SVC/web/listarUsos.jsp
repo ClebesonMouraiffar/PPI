@@ -58,7 +58,7 @@
             <!-- Sidebar -->
             <ul class="sidebar navbar-nav">
                 <li class="nav-item active">
-                    <a class="nav-link" href="./listarUsos">
+                    <a class="nav-link" href="./admin">
                         <i class="fas fa-fw"></i>
                         <span>Início</span>
                     </a>
