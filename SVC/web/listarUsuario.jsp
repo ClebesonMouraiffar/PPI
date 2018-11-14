@@ -61,6 +61,12 @@
                         <span>Início</span>
                     </a>
                 </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="./usuarios">
+                        <i class="fas fa-fw"></i>
+                        <span>Usuários</span>
+                    </a>
+                </li>
 
                 <li class="nav-item active">
                     <a class="nav-link" href="./veiculos">

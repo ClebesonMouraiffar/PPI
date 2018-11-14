@@ -67,6 +67,12 @@
                         <span>Usuários</span>
                     </a>
                 </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="./veiculos">
+                        <i class="fas fa-fw"></i>
+                        <span>Veículos</span>
+                    </a>
+                </li>
 
             </ul>
         </ul>
