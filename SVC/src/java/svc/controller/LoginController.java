@@ -43,7 +43,7 @@ public class LoginController extends HttpServlet {
 
         if (usuarioM.getId() != 0) {
             request.getSession().setAttribute("logado", usuarioM);
-            response.sendRedirect("index.jsp");
+            response.sendRedirect("./admin?acao=list");
         } else {
             response.sendRedirect("login.jsp");
         }

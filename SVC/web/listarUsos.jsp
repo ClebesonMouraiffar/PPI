@@ -1,60 +1,8 @@
-<%-- 
+<%--
     Document   : index
     Created on : 11/10/2017, 14:37:43
     Author     : LAB
 
-
-<%@page import="java.io.PrintWriter"%>
-<%@page import="java.time.format.DateTimeFormatter"%>
-<%@page import="svc.model.UsoModel"%>
-<%@page import="java.text.SimpleDateFormat"%>
-<%@page import="java.util.Date"%>
-<%@page import="java.util.ArrayList"%>
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html>
-    <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
-    </head>
-    <body>
-        <%        
-            ArrayList<UsoModel> lista = 
-                    (ArrayList<UsoModel>)request.getAttribute("lista");            
-            
-        %>
-        <a href="./index.jsp">Home</a>
-        <br>
-        <table>
-            <tr>
-                <td>Código</td>
-                <td>Saida</td>
-                <td>Retorno</td>
-                <td>Usuario</td>
-                <td>Veiculo</td>
-            </tr>
-            <%
-                for(UsoModel u : lista){
-                    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
-             %>
-             <tr>
-                 <td><%=u.getId()%></td>
-                 <td><%=u.getSaida()%></td>
-                 <td><%if(u.getRetorno()!= null){
-                      out.print(u.getRetorno());
-                 } else{
-                     out.print("Em Uso");
-                 }%></td>
-                 <td><%=u.getNomeUsuario()%></td>
-                 <td><%=u.getPlacaVeiculo()%></td>
-             </tr>
-              <% 
-                }
-            %>
-        </table>
-        
-    </body>
-</html>
 --%>
 
 <%@page import="java.time.format.DateTimeFormatter"%>
@@ -72,7 +20,7 @@
         <meta name="description" content="">
         <meta name="author" content="">
 
-        <title>Cadastro de saídas</title>
+        <title>SVC - Admin</title>
 
         <!-- Bootstrap core CSS-->
         <link href="resources/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -92,7 +40,7 @@
 
         <nav class="navbar navbar-expand navbar-dark bg-dark static-top">
 
-            <a class="navbar-brand mr-1" href="./index.jsp">Empresa XXX</a>
+            <a class="navbar-brand mr-1" href="./admin?acao=list">Empresa XXX</a>
 
             <button class="btn btn-link btn-sm text-white order-1 order-sm-0" id="sidebarToggle" href="#">
                 <i class="fas fa-bars"></i>

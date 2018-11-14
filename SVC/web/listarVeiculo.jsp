@@ -3,50 +3,6 @@
     Created on : 11/10/2017, 14:37:43
     Author     : LAB
 
-
-<%@page import="svc.model.VeiculoModel"%>
-<%@page import="java.text.SimpleDateFormat"%>
-<%@page import="java.util.Date"%>
-<%@page import="java.util.ArrayList"%>
-c<!DOCTYPE html>
-<html>
-    <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
-    </head>
-    <body>
-        <%        
-            ArrayList<VeiculoModel> lista = 
-                    (ArrayList<VeiculoModel>)request.getAttribute("lista");            
-            
-        %>
-        <a href="./index.jsp">Home</a>
-        <br>
-        <table>
-            <tr>
-                <td>C�digo</td>
-                <td>Placa</td>
-                <td>Descri��o</td>
-                <td>A��es</td>
-            </tr>
-            <%
-                for(VeiculoModel u : lista){
-             %>
-             <tr>
-                 <td><%=u.getId()%></td>
-                 <td><%=u.getPlaca()%></td>
-                 <td><%=u.getDescricao()%></td>
-                 <td><a href="./veiculo?acao=del&id=<%=u.getId()%>">Apagar</a>
-                     <a href="./veiculo?acao=editar&id=<%=u.getId()%>">Editar</a>
-                 </td>
-             </tr>
-              <% 
-                }
-            %>
-        </table>
-        
-    </body>
-</html>
 --%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="svc.model.VeiculoModel"%>
@@ -62,7 +18,7 @@ c<!DOCTYPE html>
         <meta name="description" content="">
         <meta name="author" content="">
 
-        <title>SVC - Usuários</title>
+        <title>SVC - Admin/Veiculos</title>
 
         <!-- Bootstrap core CSS-->
         <link href="resources/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -87,7 +43,7 @@ c<!DOCTYPE html>
 
         <nav class="navbar navbar-expand navbar-dark bg-dark static-top">
 
-            <a class="navbar-brand mr-1" href="index.jsp">Empresa XXX</a>
+            <a class="navbar-brand mr-1" href="./admin?acao=list">Empresa XXX</a>
 
             <button class="btn btn-link btn-sm text-white order-1 order-sm-0" id="sidebarToggle" href="#">
                 <i class="fas fa-bars"></i>
@@ -99,7 +55,7 @@ c<!DOCTYPE html>
             <!-- Sidebar -->
             <ul class="sidebar navbar-nav">
                 <li class="nav-item active">
-                    <a class="nav-link" href="index.jsp">
+                    <a class="nav-link" href="./admin?acao=list">
                         <i class="fas fa-fw"></i>
                         <span>Início</span>
                     </a>
@@ -108,7 +64,7 @@ c<!DOCTYPE html>
                 <li class="nav-item active">
                     <a class="nav-link" href="./usuarios">
                         <i class="fas fa-fw"></i>
-                        <span>Cadastrar Funcionario</span>
+                        <span>Funcionarios</span>
                     </a>
                 </li>
 
@@ -135,7 +91,7 @@ c<!DOCTYPE html>
                                             <form action="veiculo" method="POST">
                                                 <div class="form-group">
                                                     <div class="form-row">
-                                                        <div class="col-md-6">
+                                                        <div class="col-md-12">
                                                             <div class="form-label-group">
                                                                 <input name="placa" type="text" id="placa" class="form-control" required="required"
                                                                        autofocus="autofocus">
@@ -143,7 +99,7 @@ c<!DOCTYPE html>
                                                             </div>
                                                             <p>
                                                         </div>
-                                                        <div class="col-md-6">
+                                                        <div class="col-md-12">
                                                             <div class="form-label-group">
                                                                 <input name="descricao" type="text" id="descricao" class="form-control" required="required">
                                                                 <label for="descricao">Descrição</label>
@@ -215,7 +171,7 @@ c<!DOCTYPE html>
                                             <form action="veiculo?id=<%=u.getId()%>" method="POST" accept-charset="UTF-8">
                                                 <div class="form-group">
                                                     <div class="form-row">
-                                                        <div class="col-md-6">
+                                                        <div class="col-md-12">
                                                             <div class="form-label-group">
                                                                 <input name="placa" type="text" id="placa" class="form-control" required="required"
                                                                        autofocus="autofocus" value="<%=u.getPlaca()%>">
@@ -223,7 +179,7 @@ c<!DOCTYPE html>
                                                             </div>
                                                             <p>
                                                         </div>
-                                                        <div class="col-md-6">
+                                                        <div class="col-md-12">
                                                             <div class="form-label-group">
                                                                 <input name="descricao" type="text" id="descricao" class="form-control" required="required" value="<%=u.getDescricao()%>">
                                                                 <label for="descricao">Descrição</label>

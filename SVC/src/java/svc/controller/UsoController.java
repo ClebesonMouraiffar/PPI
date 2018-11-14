@@ -22,6 +22,7 @@ import svc.model.UsuarioModel;
  *
  * @author LAB
  */
+@WebServlet(name = "registro", urlPatterns = {"/registro","/admin"})
 public class UsoController extends HttpServlet {
 
     @Override

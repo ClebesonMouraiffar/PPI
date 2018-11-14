@@ -3,51 +3,6 @@
     Created on : 11/10/2017, 14:37:43
     Author     : LAB
 
-
-<%@page import="svc.model.UsuarioModel"%>
-<%@page import="java.text.SimpleDateFormat"%>
-<%@page import="java.util.Date"%>
-<%@page import="java.util.ArrayList"%>
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html>
-    <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
-    </head>
-    <body>
-        <%        
-            ArrayList<UsuarioModel> lista = 
-                    (ArrayList<UsuarioModel>)request.getAttribute("lista");            
-            
-        %>
-        <a href="./index.jsp">Home</a>
-        <br>
-        <table>
-            <tr>
-                <td>C�digo</td>
-                <td>Nome</td>
-                <td>Login</td>
-                <td>A��es</td>
-            </tr>
-            <%
-                for(UsuarioModel u : lista){
-             %>
-             <tr>
-                 <td><%=u.getId()%></td>
-                 <td><%=u.getNome()%></td>
-                 <td><%=u.getLogin()%></td>
-                 <td><a href="./usuario?acao=del&id=<%=u.getId()%>">Apagar</a>
-                     <a href="./usuario?acao=editar&id=<%=u.getId()%>">Editar</a>
-                 </td>
-             </tr>
-              <% 
-                }
-            %>
-        </table>
-        
-    </body>
-</html>
 --%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="svc.model.UsuarioModel"%>
@@ -63,7 +18,7 @@
         <meta name="description" content="">
         <meta name="author" content="">
 
-        <title>SVC - Usuários</title>
+        <title>SVC - Admin/Usuários</title>
 
         <!-- Bootstrap core CSS-->
         <link href="resources/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -89,7 +44,7 @@
 
         <nav class="navbar navbar-expand navbar-dark bg-dark static-top">
 
-            <a class="navbar-brand mr-1" href="./index.jsp">Empresa XXX</a>
+            <a class="navbar-brand mr-1" href="./admin?acao=list">Empresa XXX</a>
 
             <button class="btn btn-link btn-sm text-white order-1 order-sm-0" id="sidebarToggle" href="#">
                 <i class="fas fa-bars"></i>
@@ -101,7 +56,7 @@
             <!-- Sidebar -->
             <ul class="sidebar navbar-nav">
                 <li class="nav-item active">
-                    <a class="nav-link" href="index.jsp">
+                    <a class="nav-link" href="./admin?acao=list">
                         <i class="fas fa-fw"></i>
                         <span>Início</span>
                     </a>
@@ -122,10 +77,10 @@
             <div class="card mb-3">
                 <div class="card-header">
 
-                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" data-whatever="@fat">Cadastrar
+                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#cadastrarModal" data-whatever="@fat">Cadastrar
                         Usuário</button>
 
-                    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal fade" id="cadastrarModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                         <div class="modal-dialog" role="document">
                             <div class="modal-content">
 
@@ -134,36 +89,40 @@
                                         <div class="card card-register mx-auto mt-5">
                                             <div class="card-header">Empresa XXX</div>
                                             <div class="card-body">
-                                                <form>
+                                                <form action="usuario" method="POST">
                                                     <div class="form-group">
                                                         <div class="form-row">
-                                                            <div class="col-md-6">
+                                                            <div class="col-md-12">
                                                                 <div class="form-label-group">
-                                                                    <input type="text" id="funcionario" class="form-control" required="required"
+                                                                    <input name="nome" type="text" id="nome" class="form-control" required="required"
                                                                            autofocus="autofocus">
-                                                                    <label for="funcionario">Funcionario</label>
+                                                                    <label for="nome">Nome</label>
                                                                 </div>
                                                                 <p>
                                                             </div>
-                                                            <div class="col-md-6">
+                                                            <div class="col-md-12">
                                                                 <div class="form-label-group">
-                                                                    <input type="password" id="senha" class="form-control" required="required">
+                                                                    <input name="login" type="text" id="login" class="form-control" required="required"
+                                                                           autofocus="autofocus">
+                                                                    <label for="login">Login</label>
+                                                                </div>
+                                                                <p>
+                                                            </div>
+                                                            <div class="col-md-12">
+                                                                <div class="form-label-group">
+                                                                    <input name="senha" type="password" id="senha" class="form-control" required="required">
                                                                     <label for="senha">Senha</label>
                                                                 </div>
                                                             </div>
                                                             </p>
                                                         </div>
                                                     </div>
-
-
-                                                    <a class="btn btn-primary btn-block" href="">Registrar</a>
+                                                    <input class="btn btn-primary btn-block" type="submit" value="Salvar">
                                                 </form>
-
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-
                             </div>
                         </div>
                     </div>
@@ -188,9 +147,10 @@
                                         <td><%=u.getId()%></td>
                                         <td><%=u.getNome()%></td>
                                         <td><%=u.getLogin()%></td>
-                                        <td><a href="./usuario?acao=del&id=<%=u.getId()%>">Apagar</a>
-                                            <a href="./usuario?acao=editar&id=<%=u.getId()%>">Editar</a>
-                                        </td>
+                                        <td><a class="btn btn-danger btn-sm" href="./usuario?acao=del&id=<%=u.getId()%>">Apagar</a>
+                                        <button type="button" class="btn btn-warning btn-sm" data-toggle="modal" 
+                                                data-target="#editarModal<%=u.getId()%>" data-whatever="@fat">Editar</button>
+                                    </td>
                                     </tr>
                                     <%
                                         }
@@ -207,7 +167,61 @@
                             </table>
                         </div>
                     </div>
+                                
+                    <% for (UsuarioModel u : lista) {
+                    %>
+                    
+                    <div class="modal fade" id="editarModal<%=u.getId()%>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
 
+                                <div class="modal-body">
+                                    <div class="container">
+                                        <div class="card card-register mx-auto mt-5">
+                                            <div class="card-header">Empresa XXX</div>
+                                            <div class="card-body">
+                                                <form action="usuario?id=<%=u.getId()%>" method="POST" accept-charset="UTF-8">
+                                                    <div class="form-group">
+                                                        <div class="form-row">
+                                                            <div class="col-md-12">
+                                                                <div class="form-label-group">
+                                                                    <input name="nome" type="text" id="nome" class="form-control" required="required"
+                                                                           autofocus="autofocus" value="<%=u.getNome()%>">
+                                                                    <label for="nome">Nome</label>
+                                                                </div>
+                                                                <p>
+                                                            </div>
+                                                            <div class="col-md-12">
+                                                                <div class="form-label-group">
+                                                                    <input name="login" type="text" id="login" class="form-control" required="required"
+                                                                           autofocus="autofocus" value="<%=u.getLogin()%>">
+                                                                    <label for="login">Login</label>
+                                                                </div>
+                                                                <p>
+                                                            </div>
+                                                            <div class="col-md-12">
+                                                                <div class="form-label-group">
+                                                                    <input name="senha" type="password" id="senha" class="form-control" 
+                                                                           required="required" value="<%=u.getSenha()%>">
+                                                                    <label for="senha">Senha</label>
+                                                                </div>
+                                                            </div>
+                                                            </p>
+                                                        </div>
+                                                    </div>
+                                                    <input class="btn btn-primary btn-block" type="submit" value="Salvar">
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                        
+                    <%
+                        }
+                    %>
 
                 </div>
 

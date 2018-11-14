@@ -22,7 +22,7 @@
     </servlet>
     <servlet-mapping>
         <servlet-name>UsoController</servlet-name>
-        <url-pattern>/registro</url-pattern>
+        <url-pattern>/UsoController</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
@@ -31,7 +31,7 @@
     </session-config>
     <welcome-file-list>
         <welcome-file>
-            registro
+            UsoController
         </welcome-file>
     </welcome-file-list>
 </web-app>

@@ -67,7 +67,7 @@ public class VeiculoController extends HttpServlet {
                 if (veiculoD.editar(veiculoM)) {
                     mensagem = "Veiculo editado";
                 } else {
-                    mensagem = "Erro ao editar usuário";
+                    mensagem = "Erro ao editar veiculo";
                 }
             }
         } else {
@@ -75,7 +75,7 @@ public class VeiculoController extends HttpServlet {
             if (veiculoD.inserir(veiculoM)) {
                 mensagem = "Veiculo cadastrado";
             } else {
-                mensagem = "Erro ao cadastrar usuário";
+                mensagem = "Erro ao cadastrar veiculo";
             }
         }
 
