@@ -22,7 +22,7 @@ import svc.model.UsuarioModel;
  *
  * @author LAB
  */
-@WebServlet(name = "registro", urlPatterns = {"/registro","/admin"})
+@WebServlet(name = "registro", urlPatterns = {"/admin/registro"})
 public class UsoController extends HttpServlet {
 
     @Override
@@ -30,15 +30,8 @@ public class UsoController extends HttpServlet {
             throws ServletException, IOException {
         UsoDao usoD = new UsoDao();
         VeiculoDao veiculoD = new VeiculoDao();
-        String pagina = "./registro.jsp";
-        String acao = request.getParameter("acao");
-        if (acao != null && acao.equals("list")) {
-            request.setAttribute("lista", usoD.buscar());
-            pagina = "./listarUsos.jsp";
-        } else {
             request.setAttribute("lista", veiculoD.buscar());
-        }
-        RequestDispatcher view = request.getRequestDispatcher(pagina);
+        RequestDispatcher view = request.getRequestDispatcher("./registro.jsp");
         view.forward(request, response);
     }
 
