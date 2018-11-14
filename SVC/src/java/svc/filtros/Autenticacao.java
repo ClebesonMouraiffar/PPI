@@ -38,6 +38,7 @@ public class Autenticacao implements Filter {
                 || requisicao.getRequestURI().endsWith("registro.jsp")
                 || requisicao.getRequestURI().endsWith("registro")
                 || requisicao.getRequestURI().endsWith("login.jsp")
+                || requisicao.getRequestURI().endsWith("UsoController")
                 || requisicao.getRequestURI().endsWith(".css")
                 || requisicao.getRequestURI().endsWith("login")) {
             chain.doFilter(request, response);

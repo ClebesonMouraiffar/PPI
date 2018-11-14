@@ -16,6 +16,14 @@
         <servlet-name>UsuarioController</servlet-name>
         <url-pattern>/UsuarioController</url-pattern>
     </servlet-mapping>
+    <servlet>
+        <servlet-name>UsoController</servlet-name>
+        <servlet-class>svc.controller.UsoController</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>UsoController</servlet-name>
+        <url-pattern>/registro</url-pattern>
+    </servlet-mapping>
     <session-config>
         <session-timeout>
             30
@@ -23,7 +31,7 @@
     </session-config>
     <welcome-file-list>
         <welcome-file>
-            login.jsp
+            registro
         </welcome-file>
     </welcome-file-list>
 </web-app>

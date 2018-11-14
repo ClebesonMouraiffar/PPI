@@ -83,9 +83,6 @@ c<!DOCTYPE html>
         <%
             ArrayList<VeiculoModel> lista
                     = (ArrayList<VeiculoModel>) request.getAttribute("lista");
-            
-            VeiculoModel modelo = (VeiculoModel) request.getAttribute("veiculo");
-
         %>
 
         <nav class="navbar navbar-expand navbar-dark bg-dark static-top">
@@ -192,8 +189,9 @@ c<!DOCTYPE html>
                                     <td><%=u.getId()%></td>
                                     <td><%=u.getPlaca()%></td>
                                     <td><%=u.getDescricao()%></td>
-                                    <td><a href="./veiculo?acao=del&id=<%=u.getId()%>">Apagar</a>
-                                        <a href="./veiculo?acao=editar&id=<%=u.getId()%>">Editar</a>
+                                    <td><a class="btn btn-danger btn-sm" href="./veiculo?acao=del&id=<%=u.getId()%>">Apagar</a>
+                                        <button type="button" class="btn btn-warning btn-sm" data-toggle="modal" 
+                                                data-target="#editarModal<%=u.getId()%>" data-whatever="@fat">Editar</button>
                                     </td>
                                 </tr>
                                 <%
@@ -203,7 +201,9 @@ c<!DOCTYPE html>
                         </table>
                     </div>
                 </div>
-                <div class="modal fade" id="editarModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <% for (VeiculoModel u : lista) {
+                %>
+                <div class="modal fade" id="editarModal<%=u.getId()%>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                     <div class="modal-dialog" role="document">
                         <div class="modal-content">
 
@@ -212,20 +212,20 @@ c<!DOCTYPE html>
                                     <div class="card card-register mx-auto mt-5">
                                         <div class="card-header">Empresa XXX</div>
                                         <div class="card-body">
-                                            <form action="veiculo" method="POST">
+                                            <form action="veiculo?id=<%=u.getId()%>" method="POST" accept-charset="UTF-8">
                                                 <div class="form-group">
                                                     <div class="form-row">
                                                         <div class="col-md-6">
                                                             <div class="form-label-group">
                                                                 <input name="placa" type="text" id="placa" class="form-control" required="required"
-                                                                       autofocus="autofocus">
+                                                                       autofocus="autofocus" value="<%=u.getPlaca()%>">
                                                                 <label for="placa">Placa</label>
                                                             </div>
                                                             <p>
                                                         </div>
                                                         <div class="col-md-6">
                                                             <div class="form-label-group">
-                                                                <input name="descricao" type="text" id="descricao" class="form-control" required="required">
+                                                                <input name="descricao" type="text" id="descricao" class="form-control" required="required" value="<%=u.getDescricao()%>">
                                                                 <label for="descricao">Descrição</label>
                                                             </div>
                                                         </div>
@@ -243,10 +243,13 @@ c<!DOCTYPE html>
                         </div>
                     </div>
                 </div>
+                <%
+                    }
+                %>
                 <br>
             </div>
             <!-- /.container-fluid -->
-            
+
             <!-- Sticky Footer -->
         </div>
         <!-- /.content-wrapper -->

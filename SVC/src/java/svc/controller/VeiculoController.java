@@ -40,9 +40,8 @@ public class VeiculoController extends HttpServlet {
             } else {
                 request.setAttribute("veiculo", veiculoDao.buscar(Integer.parseInt(id)));
             }
-        } else {
-            request.setAttribute("lista", new VeiculoDao().buscar());
         }
+        request.setAttribute("lista", new VeiculoDao().buscar());
         RequestDispatcher view = request.getRequestDispatcher(pagina);
         view.forward(request, response);
 
