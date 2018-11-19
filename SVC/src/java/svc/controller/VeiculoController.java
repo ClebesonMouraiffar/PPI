@@ -20,7 +20,7 @@ import svc.model.VeiculoModel;
  *
  * @author LAB
  */
-@WebServlet(name = "veiculo", urlPatterns = {"/veiculo","/veiculos"})
+@WebServlet(name = "veiculo", urlPatterns = {"/admin/veiculo","/admin/veiculos","/veiculo","/veiculos"})
 public class VeiculoController extends HttpServlet {
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -29,7 +29,7 @@ public class VeiculoController extends HttpServlet {
             throws ServletException, IOException {
         request.setCharacterEncoding("UTF-8");
         VeiculoDao veiculoDao = new VeiculoDao();
-        String pagina = "./listarVeiculo.jsp";
+        String pagina = "./../listarVeiculo.jsp";
         String id = request.getParameter("id");
         String acao = request.getParameter("acao");
 

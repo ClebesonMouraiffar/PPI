@@ -22,15 +22,16 @@ import svc.model.UsuarioModel;
  *
  * @author LAB
  */
-@WebServlet(name = "registro", urlPatterns = {"/admin/registro"})
+@WebServlet(name = "registro", urlPatterns = {"/registro"})
 public class UsoController extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         VeiculoDao veiculoD = new VeiculoDao();
+       
             request.setAttribute("lista", veiculoD.buscar());
-        RequestDispatcher view = request.getRequestDispatcher("./registro.jsp");
+        RequestDispatcher view = request.getRequestDispatcher("./../registro.jsp");
         view.forward(request, response);
     }
 

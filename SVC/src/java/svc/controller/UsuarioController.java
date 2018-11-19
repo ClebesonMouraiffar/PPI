@@ -19,7 +19,7 @@ import svc.model.UsuarioModel;
  *
  * @author LAB
  */
-@WebServlet(name = "usuario", urlPatterns = {"/usuario","/usuarios"})
+@WebServlet(name = "usuario", urlPatterns = {"/admin/usuario","/admin/usuarios","/usuario","/usuarios"})
 public class UsuarioController extends HttpServlet {
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -28,7 +28,7 @@ public class UsuarioController extends HttpServlet {
             throws ServletException, IOException {
         request.setCharacterEncoding("UTF-8");
         UsuarioDao usuarioDao = new UsuarioDao();
-        String pagina = "./listarUsuario.jsp";
+        String pagina = "./../listarUsuario.jsp";
         String id = request.getParameter("id");
         String acao = request.getParameter("acao");
 
@@ -37,7 +37,7 @@ public class UsuarioController extends HttpServlet {
                 boolean resultado = usuarioDao.apagar(Integer.parseInt(id));
                 request.setAttribute("lista", usuarioDao.buscar());
             } else {
-                pagina = "editarUsuario.jsp";
+                pagina = "./../editarUsuario.jsp";
                 request.setAttribute("usuario", usuarioDao.buscar(Integer.parseInt(id)));
             }
         } else {
