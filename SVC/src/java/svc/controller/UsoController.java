@@ -29,7 +29,6 @@ public class UsoController extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         VeiculoDao veiculoD = new VeiculoDao();
-       
             request.setAttribute("lista", veiculoD.buscar());
         RequestDispatcher view = request.getRequestDispatcher("./registro.jsp");
         view.forward(request, response);

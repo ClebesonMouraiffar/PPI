@@ -29,7 +29,13 @@ public class AdminController extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         UsoDao usoD = new UsoDao();
-        request.setAttribute("lista", usoD.buscar());
+        String id = request.getParameter("id");
+        if (id != null) {
+            boolean resultado = usoD.apagar(Integer.parseInt(id));
+            request.setAttribute("lista", usoD.buscar());
+        } else {
+            request.setAttribute("lista", usoD.buscar());
+        }
         RequestDispatcher view = request.getRequestDispatcher("./listarUsos.jsp");
         view.forward(request, response);
     }
@@ -38,7 +44,6 @@ public class AdminController extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
-       
     }
 
 }

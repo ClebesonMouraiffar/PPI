@@ -103,6 +103,7 @@
                                         <th>Saída</th>
                                         <th>Retorno</th>
                                         <th>Retirado por</th>
+                                        <th>Ações</th>
 
                                     </tr>
                                 </thead>
@@ -120,6 +121,8 @@
                                                 out.print("Em Uso");
                                             }%></td>
                                         <td><%=u.getNomeUsuario()%></td>
+                                        <td><a class="btn btn-danger btn-sm" href="./admin?id=<%=u.getId()%>">Apagar</a>
+                                    </td>
                                     </tr>
                                     <%
                                         }
@@ -132,6 +135,7 @@
                                         <th>Saída</th>
                                         <th>Retorno</th>
                                         <th>Retirado por</th>
+                                        <th>Ações</th>
                                     </tr>
                                 </tfoot>
                             </table>

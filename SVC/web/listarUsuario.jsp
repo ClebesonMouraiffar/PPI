@@ -149,7 +149,7 @@
                                         <th>Codigo</th>
                                         <th>Nome</th>
                                         <th>Login</th>
-                                        <th>ações</th>
+                                        <th>Ações</th>
 
                                     </tr>
                                 </thead>
@@ -174,7 +174,7 @@
                                         <th>Codigo</th>
                                         <th>Nome</th>
                                         <th>Login</th>
-                                        <th>ações</th>
+                                        <th>Ações</th>
                                     </tr>
                                 </tfoot>                        
                             </table>
