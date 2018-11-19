@@ -79,7 +79,7 @@ public class VeiculoController extends HttpServlet {
             }
         }
 
-        RequestDispatcher dispatcher = request.getRequestDispatcher("resultado.jsp");
+        RequestDispatcher dispatcher = request.getRequestDispatcher("./../resultado.jsp");
         request.setAttribute("mensagem", mensagem);
         dispatcher.forward(request, response);
 

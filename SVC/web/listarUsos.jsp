@@ -76,6 +76,12 @@
                         <span>Veículos</span>
                     </a>
                 </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="./logout">
+                        <i class="fas fa-fw"></i>
+                        <span>Sair</span>
+                    </a>
+                </li>
 
             </ul>
             <%

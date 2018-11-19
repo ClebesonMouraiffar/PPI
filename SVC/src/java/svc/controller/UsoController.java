@@ -31,7 +31,7 @@ public class UsoController extends HttpServlet {
         VeiculoDao veiculoD = new VeiculoDao();
        
             request.setAttribute("lista", veiculoD.buscar());
-        RequestDispatcher view = request.getRequestDispatcher("./../registro.jsp");
+        RequestDispatcher view = request.getRequestDispatcher("./registro.jsp");
         view.forward(request, response);
     }
 

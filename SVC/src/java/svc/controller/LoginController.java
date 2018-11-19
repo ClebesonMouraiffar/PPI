@@ -19,7 +19,7 @@ import svc.model.UsuarioModel;
  *
  * @author LAB
  */
-@WebServlet(name = "login", urlPatterns = {"/login"})
+@WebServlet(name = "login", urlPatterns = {"/login","/logout"})
 public class LoginController extends HttpServlet {
 
     @Override
