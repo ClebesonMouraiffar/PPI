@@ -33,14 +33,7 @@ public class Autenticacao implements Filter {
         HttpServletRequest requisicao = (HttpServletRequest) request;
         HttpSession sessao = requisicao.getSession();
 
-        if ((sessao.getAttribute("logado") != null)
-                || requisicao.getRequestURI().endsWith("index.jsp")
-                || requisicao.getRequestURI().endsWith("registro.jsp")
-                || requisicao.getRequestURI().endsWith("registro")
-                || requisicao.getRequestURI().endsWith("login.jsp")
-                || requisicao.getRequestURI().endsWith("UsoController")
-                || requisicao.getRequestURI().endsWith(".css")
-                || requisicao.getRequestURI().endsWith("login")) {
+        if ((sessao.getAttribute("logado") != null)) {
             chain.doFilter(request, response);
         } else {
             HttpServletResponse resposta = (HttpServletResponse) response;

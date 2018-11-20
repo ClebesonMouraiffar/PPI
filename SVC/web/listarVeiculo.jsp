@@ -1,9 +1,3 @@
-<%-- 
-    Document   : index
-    Created on : 11/10/2017, 14:37:43
-    Author     : LAB
-
---%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="svc.model.VeiculoModel"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -121,7 +115,7 @@
                                                         </p>
                                                     </div>
                                                 </div>
-                                                <input class="btn btn-primary btn-block" type="submit" value="Registrar">
+                                                <input class="btn btn-primary btn-block" type="submit" value="Salvar">
                                             </form>
 
                                         </div>
@@ -201,7 +195,7 @@
                                                         </p>
                                                     </div>
                                                 </div>
-                                                <input class="btn btn-primary btn-block" type="submit" value="Registrar">
+                                                <input class="btn btn-primary btn-block" type="submit" value="Salvar">
                                             </form>
 
                                         </div>

@@ -50,6 +50,8 @@ public class UsoController extends HttpServlet {
 
         UsoDao usoD = new UsoDao();
         String mensagem = "null";
+        String tipo = "null";
+        String servelet = "./registro";
 
         UsoModel retornoUso = new UsoDao().buscar(Integer.parseInt(idveiculo));
         
@@ -61,8 +63,9 @@ public class UsoController extends HttpServlet {
                 //inserir no Banco
                 if (usoD.inserir(usoM)) {
                     mensagem = "Uso registrado";
+                    tipo = "sucess";
                 } else {
-                    mensagem = "Erro registrar Uso";
+                    mensagem = "Não foi possível registrar o uso, tente novamente.";
                 }
             } else {
                 usoM.setId(Integer.parseInt(iduso));
@@ -82,6 +85,8 @@ public class UsoController extends HttpServlet {
 
             RequestDispatcher dispatcher = request.getRequestDispatcher("resultado.jsp");
             request.setAttribute("mensagem", mensagem);
+            request.setAttribute("tipo", tipo);
+            request.setAttribute("servelet", servelet);
             dispatcher.forward(request, response);
         } else {
             response.sendRedirect("registro.jsp");

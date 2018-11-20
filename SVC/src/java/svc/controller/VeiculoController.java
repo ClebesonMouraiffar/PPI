@@ -60,27 +60,33 @@ public class VeiculoController extends HttpServlet {
 
         VeiculoDao veiculoD = new VeiculoDao();
         String mensagem = "null";
+        String tipo = "null";
+        String servelet = "./veiculos";
 
         if (id != null) {
             if (!id.equals("")) {
                 veiculoM.setId(Integer.parseInt(id));                
                 if (veiculoD.editar(veiculoM)) {
-                    mensagem = "Veiculo editado";
+                    mensagem = "Alteração concluida.";
+                    tipo = "sucess";
                 } else {
-                    mensagem = "Erro ao editar veiculo";
+                    mensagem = "Não foi possível realizar a alteração, tente novamente.";
                 }
             }
         } else {
             //usuarioD.inserir(usuarioM);
             if (veiculoD.inserir(veiculoM)) {
-                mensagem = "Veiculo cadastrado";
+                mensagem = "Cadastro Concluido";
+                tipo = "sucess";
             } else {
-                mensagem = "Erro ao cadastrar veiculo";
+                mensagem = "Não foi possível realizar o cadastro, tente novamente.";
             }
         }
 
         RequestDispatcher dispatcher = request.getRequestDispatcher("./../resultado.jsp");
         request.setAttribute("mensagem", mensagem);
+        request.setAttribute("tipo", tipo);
+        request.setAttribute("servelet", servelet);
         dispatcher.forward(request, response);
 
     }

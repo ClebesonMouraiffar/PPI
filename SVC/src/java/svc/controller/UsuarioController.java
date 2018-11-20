@@ -63,27 +63,33 @@ public class UsuarioController extends HttpServlet {
         
         UsuarioDao usuarioD = new UsuarioDao();
         String mensagem = "null";
+        String tipo = "null";
+        String servelet = "./usuarios";
 
         if (id != null) {
             if (!id.equals("")) {
                 usuarioM.setId(Integer.parseInt(id));                
                 if (usuarioD.editar(usuarioM)) {
-                    mensagem = "Usuario editado";
+                    mensagem = "Alteração concluída.";
+                    tipo = "sucess";
                 } else {
-                    mensagem = "Erro ao editar usuário";
+                    mensagem = "Não foi possível realizar a alteração, tente novamente.";
                 }
             }
         } else {
             //usuarioD.inserir(usuarioM);
             if (usuarioD.inserir(usuarioM)) {
-                mensagem = "Usuario cadastrado";
+                mensagem = "Cadastro concluído.";
+                tipo = "sucess";
             } else {
-                mensagem = "Erro ao cadastrar usuário";
+                mensagem = "Não foi possível realizar a alteração, tente novamente.";
             }
         }
 
         RequestDispatcher dispatcher = request.getRequestDispatcher("./../resultado.jsp");
         request.setAttribute("mensagem", mensagem);
+        request.setAttribute("tipo", tipo);
+        request.setAttribute("servelet", servelet);
         dispatcher.forward(request, response);
 
     }

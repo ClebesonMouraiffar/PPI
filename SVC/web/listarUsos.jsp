@@ -1,10 +1,3 @@
-<%--
-    Document   : index
-    Created on : 11/10/2017, 14:37:43
-    Author     : LAB
-
---%>
-
 <%@page import="java.time.format.DateTimeFormatter"%>
 <%@page import="svc.model.UsoModel"%>
 <%@page import="java.util.ArrayList"%>

@@ -1,8 +1,3 @@
-<%-- 
-    Document   : login
-    Created on : 22/11/2017, 22:23:40
-    Author     : LAB
---%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="svc.model.VeiculoModel"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -19,7 +14,6 @@
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
               crossorigin="anonymous"
 
-              <title> Registro de Uso</title>
 
         <!-- Bootstrap core CSS-->
         <link href="resource/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
