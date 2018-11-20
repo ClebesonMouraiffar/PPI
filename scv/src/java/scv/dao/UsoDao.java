@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package svc.dao;
+package scv.dao;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -12,7 +12,7 @@ import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
-import svc.model.UsoModel;
+import scv.model.UsoModel;
 
 public class UsoDao implements DAO<UsoModel> {
 
