@@ -1,5 +1,5 @@
 <%@page import="java.util.ArrayList"%>
-<%@page import="svc.model.UsuarioModel"%>
+<%@page import="scv.model.UsuarioModel"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="en">
@@ -68,7 +68,7 @@
                         <span>Veículos</span>
                     </a>
                 </li>
-                
+
                 <li class="nav-item active">
                     <a class="nav-link" href="./../logout">
                         <i class="fas fa-fw"></i>
@@ -120,6 +120,14 @@
                                                                     <input name="senha" type="password" id="senha" class="form-control" required="required">
                                                                     <label for="senha">Senha</label>
                                                                 </div>
+                                                                <p>
+                                                            </div>
+                                                            <div class="col-md-12">
+                                                                <select name="permissao" class="form-control" id="permissao">
+                                                                    <option value="0" selected disabled>Permissão</option>
+                                                                    <option value="1">Adminstrador</option> 
+                                                                    <option value="2">Usuário</option> 
+                                                                </select>
                                                             </div>
                                                             </p>
                                                         </div>
@@ -143,6 +151,7 @@
                                         <th>Codigo</th>
                                         <th>Nome</th>
                                         <th>Login</th>
+                                        <th>Permissão</th>
                                         <th>Ações</th>
 
                                     </tr>
@@ -154,10 +163,15 @@
                                         <td><%=u.getId()%></td>
                                         <td><%=u.getNome()%></td>
                                         <td><%=u.getLogin()%></td>
+                                        <td><%if (u.getPermissao() == 1) {
+                                                out.print("Administrador");
+                                            } else if (u.getPermissao() == 2) {
+                                                out.print("Usuário");
+                                            }%></td>
                                         <td><a class="btn btn-danger btn-sm" href="./usuario?acao=del&id=<%=u.getId()%>">Apagar</a>
-                                        <button type="button" class="btn btn-warning btn-sm" data-toggle="modal" 
-                                                data-target="#editarModal<%=u.getId()%>" data-whatever="@fat">Editar</button>
-                                    </td>
+                                            <button type="button" class="btn btn-warning btn-sm" data-toggle="modal" 
+                                                    data-target="#editarModal<%=u.getId()%>" data-whatever="@fat">Editar</button>
+                                        </td>
                                     </tr>
                                     <%
                                         }
@@ -168,16 +182,17 @@
                                         <th>Codigo</th>
                                         <th>Nome</th>
                                         <th>Login</th>
+                                        <th>Permissão</th>
                                         <th>Ações</th>
                                     </tr>
                                 </tfoot>                        
                             </table>
                         </div>
                     </div>
-                                
+
                     <% for (UsuarioModel u : lista) {
                     %>
-                    
+
                     <div class="modal fade" id="editarModal<%=u.getId()%>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                         <div class="modal-dialog" role="document">
                             <div class="modal-content">
@@ -207,11 +222,15 @@
                                                                 <p>
                                                             </div>
                                                             <div class="col-md-12">
-                                                                <div class="form-label-group">
-                                                                    <input name="senha" type="password" id="senha" class="form-control" 
-                                                                           required="required" value="<%=u.getSenha()%>">
-                                                                    <label for="senha">Senha</label>
-                                                                </div>
+                                                                <select name="permissao" class="form-control" id="permissao" >
+                                                                    <option value="0" selected disabled>Permissão</option>
+                                                                    <option value="1" <%if (u.getPermissao() == 1) {
+                                                                            out.print("selected");
+                                                                        }%>>Adminstrador</option> 
+                                                                    <option value="2"<%if (u.getPermissao() == 2) {
+                                                                            out.print("selected");
+                                                                        }%>>Usuário</option> 
+                                                                </select>
                                                             </div>
                                                             </p>
                                                         </div>
@@ -225,7 +244,7 @@
                             </div>
                         </div>
                     </div>
-                        
+
                     <%
                         }
                     %>

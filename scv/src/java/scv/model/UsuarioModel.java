@@ -18,6 +18,7 @@ public class UsuarioModel {
     private String nome;
     private String login;
     private String senha;
+    private int permissao;
 
     //getters e setters
     public int getId() {
@@ -50,6 +51,14 @@ public class UsuarioModel {
 
     public void setLogin(String login) {
         this.login = login;
+    }
+
+    public int getPermissao() {
+        return permissao;
+    }
+
+    public void setPermissao(int permissao) {
+        this.permissao = permissao;
     }
 
     public void listar() {

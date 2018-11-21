@@ -1,5 +1,5 @@
 <%@page import="java.time.format.DateTimeFormatter"%>
-<%@page import="svc.model.UsoModel"%>
+<%@page import="scv.model.UsoModel"%>
 <%@page import="java.util.ArrayList"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -91,7 +91,7 @@
                             <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                                 <thead>
                                     <tr>
-                                        <td>Código</td>
+                                        <th>Código</th>
                                         <th>Placa</th>
                                         <th>Saída</th>
                                         <th>Retorno</th>
@@ -123,7 +123,7 @@
                                 </tbody>
                                 <tfoot>
                                     <tr>
-                                        <td>Código</td>
+                                        <th>Código</th>
                                         <th>Placa</th>
                                         <th>Saída</th>
                                         <th>Retorno</th>

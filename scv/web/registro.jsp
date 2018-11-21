@@ -1,5 +1,5 @@
 <%@page import="java.util.ArrayList"%>
-<%@page import="svc.model.VeiculoModel"%>
+<%@page import="scv.model.VeiculoModel"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="pt-br">

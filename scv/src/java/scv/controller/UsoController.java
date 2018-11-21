@@ -80,14 +80,16 @@ public class UsoController extends HttpServlet {
                     mensagem = "Erro registrar Uso: veiculo nao foi devolvido";
                 }
             }
-        } else {
-            mensagem = "Usuario ou senha inválido, tente novamente";
-        }
-         RequestDispatcher dispatcher = request.getRequestDispatcher("resultado.jsp");
+            RequestDispatcher dispatcher = request.getRequestDispatcher("resultado.jsp");
             request.setAttribute("mensagem", mensagem);
             request.setAttribute("tipo", tipo);
             request.setAttribute("servelet", servelet);
             dispatcher.forward(request, response);
+        } else {
+            mensagem = "Usuario ou senha inválido, tente novamente";
+            response.sendRedirect("./registro?ret=elogin");
+        }
+
     }
 
 }

@@ -1,5 +1,5 @@
 <%@page import="java.util.ArrayList"%>
-<%@page import="svc.model.VeiculoModel"%>
+<%@page import="scv.model.VeiculoModel"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="en">
@@ -131,18 +131,18 @@
                         <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                             <thead>
                                 <tr>
-                                    <td>Código</td>
-                                    <td>Placa</td>
-                                    <td>Descrição</td>
-                                    <td>Ações</td>
+                                    <th>Código</th>
+                                    <th>Placa</th>
+                                    <th>Descrição</th>
+                                    <th>Ações</th>
                                 </tr>
                             </thead>
                             <tfoot>
                                 <tr>
-                                    <td>Código</td>
-                                    <td>Placa</td>
-                                    <td>Descrição</td>
-                                    <td>Ações</td>
+                                    <th>Código</th>
+                                    <th>Placa</th>
+                                    <th>Descrição</th>
+                                    <th>Ações</th>
                                 </tr>
                             </tfoot>
                             <tbody>

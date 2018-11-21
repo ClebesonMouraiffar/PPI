@@ -32,6 +32,7 @@ public class UsuarioDao implements DAO<UsuarioModel> {
                 usuarioM.setId(resultado.getInt("idusuario"));
                 usuarioM.setNome(resultado.getString("nome"));
                 usuarioM.setLogin(resultado.getString("login"));
+                usuarioM.setPermissao(resultado.getInt("permissao"));
                 lista.add(usuarioM);
             }
         } catch (Exception e) {
@@ -97,10 +98,11 @@ public class UsuarioDao implements DAO<UsuarioModel> {
         Connection conect = conexao.abrirConexao();
         try {
             PreparedStatement statement = conect.prepareStatement(
-                    "insert into "+ tabela +"(nome,login,senha) values (?,?,?)");
+                    "insert into "+ tabela +"(nome,login,senha,permissao) values (?,?,?,?)");
             statement.setString(1, usuarioM.getNome());
             statement.setString(2, usuarioM.getLogin());
             statement.setString(3, usuarioM.getSenha());
+            statement.setInt(4, usuarioM.getPermissao());
 
             statement.execute();
             return true;
@@ -117,10 +119,10 @@ public class UsuarioDao implements DAO<UsuarioModel> {
         try {
             Connection conect = new Conexao().abrirConexao();
             PreparedStatement statement
-                    = conect.prepareStatement("update "+ tabela +" set nome = ?, login = ?, senha = ? where idusuario = ?");
+                    = conect.prepareStatement("update "+ tabela +" set nome = ?, login = ?, permissao = ? where idusuario = ?");
             statement.setString(1, usuarioM.getNome());
             statement.setString(2, usuarioM.getLogin());
-            statement.setString(3, usuarioM.getSenha());
+            statement.setInt(3, usuarioM.getPermissao());
             statement.setInt(4, usuarioM.getId());
             statement.executeUpdate();
 

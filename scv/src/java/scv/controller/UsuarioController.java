@@ -59,6 +59,7 @@ public class UsuarioController extends HttpServlet {
         usuarioM.setNome(request.getParameter("nome"));
         usuarioM.setLogin(request.getParameter("login"));
         usuarioM.setSenha(request.getParameter("senha"));
+        usuarioM.setPermissao(Integer.parseInt(request.getParameter("permissao")));
         String id = request.getParameter("id");
         
         UsuarioDao usuarioD = new UsuarioDao();
