@@ -34,11 +34,13 @@
                             try {
                                 String error = request.getParameter("error").toString();
                                 if (error.equals("incorrect")) {%>
-                        <div class="alert alert-danger col-md-12">
+                        <div class="alert alert-danger col-md-12 alert-dismissible">
+                            <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
                             Usuário ou Senha Incorreto!
                         </div>
                         <%} else if (error.equals("notadm")) {%>
-                        <div class="alert alert-danger col-md-12">
+                        <div class="alert alert-danger col-md-12 alert-dismissible">
+                            <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
                             Usuário sem permissão de acesso!
                         </div>
                         <%}

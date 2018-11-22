@@ -159,7 +159,7 @@
                 <footer class="sticky-footer">
                     <div class="container my-auto">
                         <div class="copyright text-center my-auto">
-                            <span>PPI - TSI</span>
+                            <span>@2018 Pratica Profissional Integrada do Curso Superior de Tecnologia em Sistemas para Internet</span>
                         </div>
                     </div>
                 </footer>

@@ -120,11 +120,13 @@
                     <%if (!mensagem.equals("null") && !tipo.equals("null")) {
                             if (tipo.equals("sucess")) {
                     %>
-                    <div class="alert alert-success col-md-12">
+                    <div class="alert alert-success col-md-12 alert-dismissible">
+                        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
                         <%=request.getAttribute("mensagem")%>
                     </div>
                     <%} else if (tipo.equals("error")) {%>
-                    <div class="alert alert-danger col-md-12">
+                    <div class="alert alert-danger col-md-12 alert-dismissible">
+                        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
                         <%=request.getAttribute("mensagem")%>
                     </div>
                     <%}
@@ -245,7 +247,7 @@
                 <footer class="sticky-footer">
                     <div class="container my-auto">
                         <div class="copyright text-center my-auto">
-                            <span>PPI - TSI</span>
+                            <span>@2018 Pratica Profissional Integrada do Curso Superior de Tecnologia em Sistemas para Internet</span>
                         </div>
                     </div>
                 </footer>

@@ -44,7 +44,8 @@
                                 <div class="card card-register mx-auto mt-5">
                                     <div class="card-header">Mensagem</div>
                                     <div class="card-body">
-                                        <div class="alert alert-success col-md-12">
+                                        <div class="alert alert-success col-md-12 alert-dismissible">
+                                            <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
                                             <%=request.getAttribute("mensagem")%>
                                         </div>
                                     </div>
@@ -62,16 +63,19 @@
                         <%if (!mensagem.equals("null") && !tipo.equals("null")) {
                                 if (tipo.equals("sucess")) {
                         %>
-                        <div class="alert alert-success col-md-12">
+                        <div class="alert alert-success col-md-12 alert-dismissible">
+                            <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
                             <%=request.getAttribute("mensagem")%>
                         </div>
                         <%} else if (tipo.equals("error")) {%>
-                        <div class="alert alert-danger col-md-12">
+                        <div class="alert alert-danger col-md-12 alert-dismissible">
+                            <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
                             <%=request.getAttribute("mensagem")%>
                         </div>
                         <%}else if (tipo.equals("emuso")) {
                         %>
-                        <div class="alert alert-danger col-md-12">
+                        <div class="alert alert-danger col-md-12 alert-dismissible">
+                            <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
                             <%=request.getAttribute("mensagem")%>
                         </div>
                         <input name="retornouso" value="devolvido" hidden="true">
