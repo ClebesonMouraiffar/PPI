@@ -45,7 +45,7 @@ public class LoginController extends HttpServlet {
             request.getSession().setAttribute("logado", usuarioM);
             response.sendRedirect("./admin");
         } else {
-            response.sendRedirect("login.jsp");
+            response.sendRedirect("login.jsp?error");
         }
     }
 

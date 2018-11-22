@@ -15,8 +15,8 @@
               crossorigin="anonymous"
 
 
-        <!-- Bootstrap core CSS-->
-        <link href="resource/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+              <!-- Bootstrap core CSS-->
+              <link href="resource/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 
         <!-- Custom fonts for this template-->
         <link href="resource/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
@@ -30,27 +30,70 @@
         <%
             ArrayList<VeiculoModel> lista
                     = (ArrayList<VeiculoModel>) request.getAttribute("lista");
-
+            String mensagem = request.getAttribute("mensagem").toString();
+            String tipo = request.getAttribute("tipo").toString();
         %>
 
         <div class="container">
+            <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+
+                        <div class="modal-body">
+                            <div class="container">
+                                <div class="card card-register mx-auto mt-5">
+                                    <div class="card-header">Mensagem</div>
+                                    <div class="card-body">
+                                        <div class="alert alert-success col-md-12">
+                                            <%=request.getAttribute("mensagem")%>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
             <div class="card card-register mx-auto mt-5">
                 <div class="card-header">Empresa XXX</div>
                 <div class="card-body">
                     <form action="./registro" method="POST">
+                        <%if (!mensagem.equals("null") && !tipo.equals("null")) {
+                                if (tipo.equals("sucess")) {
+                        %>
+                        <div class="alert alert-success col-md-12">
+                            <%=request.getAttribute("mensagem")%>
+                        </div>
+                        <%} else if (tipo.equals("error")) {%>
+                        <div class="alert alert-danger col-md-12">
+                            <%=request.getAttribute("mensagem")%>
+                        </div>
+                        <%}else if (tipo.equals("emuso")) {
+                        %>
+                        <div class="alert alert-danger col-md-12">
+                            <%=request.getAttribute("mensagem")%>
+                        </div>
+                        <input name="retornouso" value="devolvido" hidden="true">
+                        <input class="btn btn-primary btn-block" type="submit" value="Devolver veículo e Registrar Uso"/>
+                        <a href="./registro" class="btn btn-danger btn-block">Cancelar</a>
+                        <%}
+                        }%>
+                        <%
+                            if (!tipo.equals("emuso")) {
+                        %> 
                         <div class="form-group">
                             <div class="form-row">
                                 <div class="col-md-6">
-                                    
-                                        <label for="login">Usuário</label>
-                                        <input name="login" type="text" id="login" class="form-control" placeholder="Login" required="required" autofocus="autofocus">
-                                     
-                                    <p></div>
+                                    <input name="retornouso" value="devolvido" hidden="true">
+                                    <label for="login">Usuário</label>
+                                    <input name="login" type="text" id="login" class="form-control" placeholder="Login" required="required" autofocus="autofocus">
+
+                                    <p>
+                                </div>                                
                                 <div class="col-md-6">
                                     <label for="senha">Senha</label>
-                                        <input name="senha" type="password" id="senha" class="form-control" placeholder="Senha" required="required">
-                                        
-                                    
+                                    <input name="senha" type="password" id="senha" class="form-control" placeholder="Senha" required="required">
                                 </div>
                             </div>
                         </div>
@@ -72,8 +115,8 @@
                             </div>
 
                         </div>
-
                         <input class="btn btn-primary btn-block" type="submit" value="Registrar Uso"/>
+                        <%}%>
                     </form>
                 </div>
             </div>
