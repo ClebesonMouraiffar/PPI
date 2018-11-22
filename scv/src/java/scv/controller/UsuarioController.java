@@ -19,7 +19,7 @@ import scv.model.UsuarioModel;
  *
  * @author LAB
  */
-@WebServlet(name = "usuario", urlPatterns = {"/admin/usuario","/admin/usuarios","/usuario","/usuarios"})
+@WebServlet(name = "usuario", urlPatterns = {"/admin/usuario", "/admin/usuarios", "/usuario", "/usuarios"})
 public class UsuarioController extends HttpServlet {
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -31,7 +31,27 @@ public class UsuarioController extends HttpServlet {
         String pagina = "./../listarUsuario.jsp";
         String id = request.getParameter("id");
         String acao = request.getParameter("acao");
+        String mensagem = "null";
+        String tipo = "null";
 
+        if (acao != null) {
+            if (acao.equals("edtok")) {
+                mensagem = "Alteração concluida.";
+                tipo = "sucess";
+            }
+            if (acao.equals("edterror")) {
+                mensagem = "Não foi possível realizar a alteração, tente novamente.";
+                tipo = "error";
+            }
+            if (acao.equals("cadok")) {
+                mensagem = "Cadastro Concluido";
+                tipo = "sucess";
+            }
+            if (acao.equals("caderror")) {
+                mensagem = "Não foi possível realizar o cadastro, tente novamente.";
+                tipo = "error";
+            }
+        }
         if (id != null && acao != null) {
             if (acao.equals("del")) {
                 boolean resultado = usuarioDao.apagar(Integer.parseInt(id));
@@ -43,6 +63,8 @@ public class UsuarioController extends HttpServlet {
         } else {
             request.setAttribute("lista", new UsuarioDao().buscar());
         }
+        request.setAttribute("tipo", tipo);
+        request.setAttribute("mensagem", mensagem);
         RequestDispatcher view = request.getRequestDispatcher(pagina);
         view.forward(request, response);
 
@@ -53,45 +75,34 @@ public class UsuarioController extends HttpServlet {
             throws ServletException, IOException {
 
         UsuarioModel usuarioM = new UsuarioModel();
-        
+
         request.setCharacterEncoding("UTF-8");
-        
+
         usuarioM.setNome(request.getParameter("nome"));
         usuarioM.setLogin(request.getParameter("login"));
         usuarioM.setSenha(request.getParameter("senha"));
         usuarioM.setPermissao(Integer.parseInt(request.getParameter("permissao")));
         String id = request.getParameter("id");
-        
+
         UsuarioDao usuarioD = new UsuarioDao();
-        String mensagem = "null";
-        String tipo = "null";
-        String servelet = "./usuarios";
 
         if (id != null) {
             if (!id.equals("")) {
-                usuarioM.setId(Integer.parseInt(id));                
+                usuarioM.setId(Integer.parseInt(id));
                 if (usuarioD.editar(usuarioM)) {
-                    mensagem = "Alteração concluída.";
-                    tipo = "sucess";
+                    response.sendRedirect("./usuario?acao=edtok");
                 } else {
-                    mensagem = "Não foi possível realizar a alteração, tente novamente.";
+                    response.sendRedirect("./usuario?acao=edterror");
                 }
             }
         } else {
             //usuarioD.inserir(usuarioM);
             if (usuarioD.inserir(usuarioM)) {
-                mensagem = "Cadastro concluído.";
-                tipo = "sucess";
+                response.sendRedirect("./usuario?acao=cadok");
             } else {
-                mensagem = "Não foi possível realizar a alteração, tente novamente.";
+                response.sendRedirect("./usuario?acao=caderror");
             }
         }
-
-        RequestDispatcher dispatcher = request.getRequestDispatcher("./../resultado.jsp");
-        request.setAttribute("mensagem", mensagem);
-        request.setAttribute("tipo", tipo);
-        request.setAttribute("servelet", servelet);
-        dispatcher.forward(request, response);
 
     }
 

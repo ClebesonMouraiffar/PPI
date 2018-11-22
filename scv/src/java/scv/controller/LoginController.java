@@ -19,14 +19,14 @@ import scv.model.UsuarioModel;
  *
  * @author LAB
  */
-@WebServlet(name = "login", urlPatterns = {"/login","/logout"})
+@WebServlet(name = "login", urlPatterns = {"/login", "/logout"})
 public class LoginController extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         HttpSession session = request.getSession();
-       session.invalidate();
+        session.invalidate();
         response.sendRedirect("login.jsp");
 
     }
@@ -37,15 +37,19 @@ public class LoginController extends HttpServlet {
 
         String login = request.getParameter("login");
         String senha = request.getParameter("senha");
-         
+
         UsuarioModel usuarioM
                 = new UsuarioDao().login(login, senha);
 
         if (usuarioM.getId() != 0) {
-            request.getSession().setAttribute("logado", usuarioM);
-            response.sendRedirect("./admin");
+            if (usuarioM.getPermissao() == 1) {
+                request.getSession().setAttribute("logado", usuarioM);
+                response.sendRedirect("./admin");
+            } else{
+                response.sendRedirect("login.jsp?error=notadm");
+            }
         } else {
-            response.sendRedirect("login.jsp?error");
+            response.sendRedirect("login.jsp?error=incorrect");
         }
     }
 

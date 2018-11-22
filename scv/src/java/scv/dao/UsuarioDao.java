@@ -82,6 +82,7 @@ public class UsuarioDao implements DAO<UsuarioModel> {
             while (resultado.next()) {
                 usuarioM.setId(resultado.getInt("idusuario"));
                 usuarioM.setLogin(resultado.getString("login"));
+                usuarioM.setPermissao(resultado.getInt("permissao"));
             }
             resultado.close();
             statement.close();

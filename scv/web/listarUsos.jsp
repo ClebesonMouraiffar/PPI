@@ -13,7 +13,7 @@
         <meta name="description" content="">
         <meta name="author" content="">
 
-        <title>SVC - Admin</title>
+        <title>SCV - Admin</title>
 
         <!-- Bootstrap core CSS-->
         <link href="./resources/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -30,7 +30,11 @@
     </head>
 
     <body id="page-top">
+        <%
+            ArrayList<UsoModel> lista
+                    = (ArrayList<UsoModel>) request.getAttribute("lista");
 
+        %>
         <nav class="navbar navbar-expand navbar-dark bg-dark static-top">
 
             <a class="navbar-brand mr-1" href="./admin">Empresa XXX</a>
@@ -38,11 +42,6 @@
             <button class="btn btn-link btn-sm text-white order-1 order-sm-0" id="sidebarToggle" href="#">
                 <i class="fas fa-bars"></i>
             </button>
-
-
-
-            <!-- Navbar -->
-
 
         </nav>
 
@@ -52,147 +51,147 @@
             <ul class="sidebar navbar-nav">
                 <li class="nav-item active">
                     <a class="nav-link" href="./admin">
-                        <i class="fas fa-fw"></i>
+                        <i class="fas fa-fw fa-tachometer-alt"></i>
                         <span>Início</span>
                     </a>
                 </li>
-                
                 <li class="nav-item active">
                     <a class="nav-link" href="./admin/usuarios">
-                        <i class="fas fa-fw"></i>
-                        <span>Usuários</span>
-                    </a>
+                        <i class="fas fa-fw fa-users"></i>
+                        <span>Usuários</span></a>
                 </li>
                 <li class="nav-item active">
                     <a class="nav-link" href="./admin/veiculos">
-                        <i class="fas fa-fw"></i>
-                        <span>Veículos</span>
-                    </a>
+                        <i class="fas fa-fw fa-car"></i>
+                        <span>Veículos</span></a>
                 </li>
                 <li class="nav-item active">
                     <a class="nav-link" href="./logout">
-                        <i class="fas fa-fw"></i>
-                        <span>Sair</span>
-                    </a>
+                        <i class="fas fa-fw fa-sign-out-alt"></i>
+                        <span>Sair</span></a>
                 </li>
-
             </ul>
-            <%
-                ArrayList<UsoModel> lista
-                        = (ArrayList<UsoModel>) request.getAttribute("lista");
 
-            %>
-            <!-- DataTables Example -->
-            <div class="card mb-3">
-                <div class="card-header">
+            <div id="content-wrapper">
 
-                    <div class="card-body">
-                        <div class="table-responsive">
-                            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                                <thead>
-                                    <tr>
-                                        <th>Código</th>
-                                        <th>Placa</th>
-                                        <th>Saída</th>
-                                        <th>Retorno</th>
-                                        <th>Retirado por</th>
-                                        <th>Ações</th>
+                <div class="container-fluid">
 
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <%      for (UsoModel u : lista) {
-                                            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
-                                    %>
-                                    <tr>
-                                        <td><%=u.getId()%></td>
-                                        <td><%=u.getPlacaVeiculo()%></td>
-                                        <td><%=u.getSaida()%></td>
-                                        <td><%if (u.getRetorno() != null) {
-                                                out.print(u.getRetorno());
-                                            } else {
-                                                out.print("Em Uso");
-                                            }%></td>
-                                        <td><%=u.getNomeUsuario()%></td>
-                                        <td><a class="btn btn-danger btn-sm" href="./admin?id=<%=u.getId()%>">Apagar</a>
-                                    </td>
-                                    </tr>
-                                    <%
-                                        }
-                                    %>
-                                </tbody>
-                                <tfoot>
-                                    <tr>
-                                        <th>Código</th>
-                                        <th>Placa</th>
-                                        <th>Saída</th>
-                                        <th>Retorno</th>
-                                        <th>Retirado por</th>
-                                        <th>Ações</th>
-                                    </tr>
-                                </tfoot>
-                            </table>
+                    <!-- DataTables Example -->
+                    <div class="card mb-3">
+                        <div class="card-header">
+                            <i class="fas fa-table"></i>
+                            Usos</div>
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                                    <thead>
+                                        <tr>
+                                            <th>Código</th>
+                                            <th>Placa</th>
+                                            <th>Saída</th>
+                                            <th>Retorno</th>
+                                            <th>Retirado por</th>
+                                            <th>Ações</th>
+
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <%for (UsoModel u : lista) {
+                                                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
+                                        %>
+                                        <tr>
+                                            <td><%=u.getId()%></td>
+                                            <td><%=u.getPlacaVeiculo()%></td>
+                                            <td><%=u.getSaida()%></td>
+                                            <td><%if (u.getRetorno() != null) {
+                                                    out.print(u.getRetorno());
+                                                } else {
+                                                    out.print("Em Uso");
+                                                }%></td>
+                                            <td><%=u.getNomeUsuario()%></td>
+                                            <td>
+                                                <button type="button" class="btn btn-danger btn-sm" data-toggle="modal" 
+                                                        data-target="#apagarModal<%=u.getId()%>" data-whatever="@fat">Apagar</button>
+                                            </td>
+                                        </tr>
+                                        <%
+                                            }
+                                        %>
+                                    </tbody>
+                                    <tfoot>
+                                        <tr>
+                                            <th>Código</th>
+                                            <th>Placa</th>
+                                            <th>Saída</th>
+                                            <th>Retorno</th>
+                                            <th>Retirado por</th>
+                                            <th>Ações</th>
+                                        </tr>
+                                    </tfoot>
+                                </table>
+                            </div>
+                        </div>
+                        <% for (UsoModel u : lista) {
+                        %>
+
+                        <div class="modal fade" id="apagarModal<%=u.getId()%>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title">Deseja Apagar esse Item?</h5>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <a class="btn btn-danger" href="./admin?id=<%=u.getId()%>">Apagar</a>
+                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <%
+                            }
+                        %>
+                    </div
+                </div>
+                <!-- /.container-fluid -->
+
+                <!-- Sticky Footer -->
+                <footer class="sticky-footer">
+                    <div class="container my-auto">
+                        <div class="copyright text-center my-auto">
+                            <span>PPI - TSI</span>
                         </div>
                     </div>
-
-                </div>
+                </footer>
 
             </div>
-            <!-- /.container-fluid -->
-
-            <!-- Sticky Footer -->
-
+            <!-- /.content-wrapper -->
 
         </div>
-        <!-- /.content-wrapper -->
+        <!-- /#wrapper -->
 
-    </div>
-    <!-- /#wrapper -->
+        <!-- Scroll to Top Button-->
+        <a class="scroll-to-top rounded" href="#page-top">
+            <i class="fas fa-angle-up"></i>
+        </a>
 
-    <!-- Scroll to Top Button-->
-    <a class="scroll-to-top rounded" href="#page-top">
-        <i class="fas fa-angle-up"></i>
-    </a>
+        <!-- Bootstrap core JavaScript-->
+        <script src="./resources/vendor/jquery/jquery.min.js"></script>
+        <script src="./resources/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
-    <!-- Logout Modal-->
-    <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
-                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">�</span>
-                    </button>
-                </div>
-                <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
-                <div class="modal-footer">
-                    <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                    <a class="btn btn-primary" href="login.html">Logout</a>
-                </div>
-            </div>
-        </div>
-    </div>
+        <!-- Core plugin JavaScript-->
+        <script src="./resources/vendor/jquery-easing/jquery.easing.min.js"></script>
 
-    <!-- Bootstrap core JavaScript-->
-    <script src="./resources/vendor/jquery/jquery.min.js"></script>
-    <script src="./resources/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+        <!-- Page level plugin JavaScript-->
+        <script src="./resources/vendor/datatables/jquery.dataTables.js"></script>
+        <script src="./resources/vendor/datatables/dataTables.bootstrap4.js"></script>
 
-    <!-- Core plugin JavaScript-->
-    <script src="./resources/vendor/jquery-easing/jquery.easing.min.js"></script>
+        <!-- Custom scripts for all pages-->
+        <script src="./resources/js/sb-admin.min.js"></script>
 
-    <!-- Page level plugin JavaScript-->
-    <script src="./resources/vendor/chart.js/Chart.min.js"></script>
-    <script src="./resources/vendor/datatables/jquery.dataTables.js"></script>
-    <script src="./resources/vendor/datatables/dataTables.bootstrap4.js"></script>
+        <!-- Demo scripts for this page-->
+        <script src="./resources/js/demo/datatables-demo.js"></script>
 
-    <!-- Custom scripts for all pages-->
-    <script src="./resources/js/sb-admin.min.js"></script>
-
-    <!-- Demo scripts for this page-->
-    <script src="./resources/js/demo/datatables-demo.js"></script>
-    <script src="./resources/js/demo/chart-area-demo.js"></script>
-
-</body>
+    </body>
 
 </html>
-
